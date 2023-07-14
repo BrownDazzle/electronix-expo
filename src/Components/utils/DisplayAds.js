@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-ads';
 import {
@@ -8,7 +8,7 @@ import {
     AdMobRewarded,
 } from 'react-native-admob'
 
-/* Display a banner
+ Display a banner
 <AdMobBanner
 adSize="fullBanner"
 adUnitID="your-admob-unit-id"
@@ -33,7 +33,7 @@ AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
 // Display a rewarded ad
 AdMobRewarded.setAdUnitID('your-admob-unit-id');
 AdMobRewarded.requestAd().then(() => AdMobRewarded.showAd());
-*/
+
 
 const DisplayAdScreen = () => {
     return (
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DisplayAdScreen;
+export default DisplayAdScreen;*/

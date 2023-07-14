@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { AdMobBanner, AdMobInterstitial, AdMobRewarded } from 'react-native-google-mobile-ads';
 
@@ -44,3 +44,4 @@ const styles = StyleSheet.create({
 });
 
 export default GoogleAd;
+*/
