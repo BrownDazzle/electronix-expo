@@ -4,6 +4,7 @@ import RoootNavigator from './src/navigations/RootNavigator'
 import ToastManager, { Toast } from "expo-react-native-toastify";
 import store from './src/globalRedux/store'
 import { Provider } from 'react-redux'
+import 'expo-dev-client'
 
 
 const App = () => {
