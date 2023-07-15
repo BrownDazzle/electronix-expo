@@ -37,7 +37,7 @@ export default function PromosList() {
         })
     }
     return (
-        <View style={{ marginTop: 15, marginBottom: 80 }}>
+        <View style={{ marginTop: 15, marginBottom: 20 }}>
             <Text style={{ fontSize: SIZES.large, fontWeight: FONTS.bold, color: COLORS.primary, marginBottom: 10, paddingLeft: 10 }}>Promotions</Text>
             <FlatList
                 data={promotions}

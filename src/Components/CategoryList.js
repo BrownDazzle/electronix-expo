@@ -33,7 +33,7 @@ export default function CategoryList() {
     }
 
     return (
-        <View style={{ marginTop: 10 }}>
+        <View style={{ marginTop: 10, paddingLeft: 20 }}>
             <FlatList
                 data={categoryData}
                 horizontal={true}

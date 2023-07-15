@@ -24,7 +24,7 @@ export default function Slider() {
     setSlider(resp)
   }
   return (
-    <View >
+    <View style={{ paddingLeft: 20 }}>
       <FlatList
         data={bannerData}
         horizontal={true}
@@ -33,7 +33,7 @@ export default function Slider() {
           <View key={item.id}>
             <Image source={item.cover}
               style={{
-                width: Dimensions.get('screen').width * 0.87
+                width: 350
                 , height: 150, borderRadius: 10, marginRight: 15
               }}
             />

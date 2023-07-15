@@ -31,32 +31,42 @@ export default function HomeScreen() {
             <ToastManager style={{ top: 0 }} />
             <WelcomeHeader />
             <BottomMenu />
-            <ScrollView style={{ paddingHorizontal: 20, paddingTop: 10 }}>
+            <ScrollView style={{ paddingTop: 10 }}>
                 <Slider />
                 <CategoryList />
-                <BannerAd
-                    unitId={adUnitId}
-                    size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-                    requestOptions={{
-                        requestNonPersonalizedAdsOnly: true,
-                    }}
-                />
+                <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
+                </View>
+
                 <PopularProducts />
-                <BannerAd
-                    unitId={adUnitId}
-                    size={BannerAdSize.BANNER}
-                    requestOptions={{
-                        requestNonPersonalizedAdsOnly: true,
-                    }}
-                />
+                <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
+                </View>
                 <PromosList />
-                <BannerAd
-                    unitId={adUnitId}
-                    size={BannerAdSize.LARGE_BANNER}
-                    requestOptions={{
-                        requestNonPersonalizedAdsOnly: true,
-                    }}
-                />
+                <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.INLINE_ADAPTIVE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
+                </View>
+                <View style={{ height: 80 }}>
+
+                </View>
             </ScrollView>
 
         </>
