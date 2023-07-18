@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { View, Text, SafeAreaView, Image, StatusBar, FlatList, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from "../constants";
@@ -11,6 +11,13 @@ import RelatedProducts from "../Components/RelatedProducts";
 import ToastManager from "expo-react-native-toastify";
 import { setAddItemToCart, setDecreaseItemQTY, setIncreaseItemQTY } from "../globalRedux/features/CartSlice";
 import { useDispatch } from "react-redux";
+
+import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
+
+const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(TestIds.REWARDED_INTERSTITIAL, {
+    requestNonPersonalizedAdsOnly: true
+});
 
 const DetailsHeader = ({ data, navigation }) => {
     const [playing, setPlaying] = useState(false);
@@ -48,6 +55,50 @@ const DetailScreen = ({ route, navigation }) => {
     const { product } = route.params
     const dispatch = useDispatch()
     const scrollViewRef = useRef(null);
+
+    const [rewardedInterstitialLoaded, setRewardedInterstitialLoaded] = useState(false);
+
+
+    const loadRewardedInterstitial = () => {
+        const unsubscribeLoaded = rewardedInterstitial.addAdEventListener(
+            RewardedAdEventType.LOADED,
+            () => {
+                setRewardedInterstitialLoaded(true);
+            }
+        );
+
+        const unsubscribeEarned = rewardedInterstitial.addAdEventListener(
+            RewardedAdEventType.EARNED_REWARD,
+            reward => {
+                console.log(`User earned reward of ${reward.amount} ${reward.type}`);
+            }
+        );
+
+        const unsubscribeClosed = rewardedInterstitial.addAdEventListener(
+            AdEventType.CLOSED,
+            () => {
+                setRewardedInterstitialLoaded(false);
+                rewardedInterstitial.load();
+            }
+        );
+
+        rewardedInterstitial.load();
+
+        return () => {
+            unsubscribeLoaded();
+            unsubscribeClosed();
+            unsubscribeEarned();
+        }
+    };
+
+    useEffect(() => {
+        const unsubscribeRewardedInterstitialEvents = loadRewardedInterstitial();
+
+        return () => {
+            unsubscribeRewardedInterstitialEvents();
+        };
+    }, [])
+
 
     const scrollToBottom = () => {
         scrollViewRef?.current?.scrollToEnd({ animated: true });
@@ -97,7 +148,7 @@ const DetailScreen = ({ route, navigation }) => {
                         }} />
                         <FontAwesome5 name="opencart" size={25} color={COLORS.white} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleBuy()}>
+                    <TouchableOpacity onPress={() => { handleBuy(); rewardedInterstitial.show() }}>
                         <Text style={{ paddingVertical: 8, paddingHorizontal: 12, borderRadius: 8, color: COLORS.white, backgroundColor: COLORS.tertiary, fontSize: SIZES.medium, fontWeight: FONTS.bold }}>Buy Now</Text>
                     </TouchableOpacity>
                     <View style={{ flexDirection: "row", justifyContent: 'space-around', marginTop: 5 }}>
@@ -110,11 +161,50 @@ const DetailScreen = ({ route, navigation }) => {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
+                </View>
+
                 <View style={{ padding: SIZES.font }}>
                     <DetailsDesc data={product} />
                 </View>
+                <View style={{ justifyContent: 'center', marginVertical: 10, paddingLeft: 50 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.MEDIUM_RECTANGLE}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
+                </View>
+
                 <RelatedProducts />
+                <View style={{ justifyContent: 'center', marginVertical: 10, paddingLeft: 30 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.LARGE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
+                </View>
+
                 <CustomerFeed />
+                <View style={{ justifyContent: 'center', marginVertical: 10, paddingLeft: 50 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.MEDIUM_RECTANGLE}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
+                </View>
                 <View style={{ height: 50 }}>
 
                 </View>

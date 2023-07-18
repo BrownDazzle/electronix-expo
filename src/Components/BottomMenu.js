@@ -6,13 +6,22 @@ import assets from '../constants/assets'
 import { COLORS, FONTS, SIZES } from "../constants";
 import { CircleButton, RectButton } from './Button';
 import { selectCartItems } from '../globalRedux/features/CartSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectNotificationState, setOpenNotification } from '../globalRedux/features/NotificationSlice';
 
 
 function BottomMenu() {
     const navigation = useNavigation();
+    const dispatch = useDispatch()
+    const ifCartState = useSelector(selectNotificationState);
 
     const cartItems = useSelector(selectCartItems);
+
+    const handleNotification = () => {
+        dispatch(setOpenNotification({
+            notificationState: true
+        }))
+    }
 
     const handleBookAppointment = () => {
         // Navigate to the booking screen
@@ -21,8 +30,9 @@ function BottomMenu() {
 
     return (
         <>
+
             <View style={styles.totalContainer}>
-                <TouchableOpacity onPress={() => navigation.navigate("NotificationsScreen")} >
+                <TouchableOpacity onPress={() => handleNotification()/*navigation.navigate("HomeScreen")*/} >
                     <MaterialCommunityIcons name="home-circle" size={34} color={COLORS.blueish} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate("ChatScreen")} >

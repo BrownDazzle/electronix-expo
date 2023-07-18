@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
-import RNPickerSelect from 'react-native-picker-select';
+import React, { useState, useEffect } from 'react';
+//import Picker from 'react-native-wheel-picker';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, StatusBar, ScrollView } from 'react-native';
 import { RectButton, CircleButton, Directions } from '../Components';
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from '../constants';
+import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
+
+
+const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
+    requestNonPersonalizedAdsOnly: true
+});
+
+const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(TestIds.REWARDED_INTERSTITIAL, {
+    requestNonPersonalizedAdsOnly: true
+});
 
 const DetailsHeader = ({ items, navigation }) => {
     const [playing, setPlaying] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(0);
+    const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+
+    const onItemSelected = (index) => {
+        setSelectedItem(index);
+    };
     /*useEffect(() => {
       setVideoChapter(param?.courseContent)
     }, [])
@@ -41,6 +57,74 @@ const DetailsHeader = ({ items, navigation }) => {
 };
 
 const ShippingScreen = ({ navigation }) => {
+    const [interstitialLoaded, setInterstitialLoaded] = useState(false);
+    const [rewardedInterstitialLoaded, setRewardedInterstitialLoaded] = useState(false);
+
+    const loadRewardedInterstitial = () => {
+        const unsubscribeLoaded = rewardedInterstitial.addAdEventListener(
+            RewardedAdEventType.LOADED,
+            () => {
+                setRewardedInterstitialLoaded(true);
+            }
+        );
+
+        const unsubscribeEarned = rewardedInterstitial.addAdEventListener(
+            RewardedAdEventType.EARNED_REWARD,
+            reward => {
+                console.log(`User earned reward of ${reward.amount} ${reward.type}`);
+            }
+        );
+
+        const unsubscribeClosed = rewardedInterstitial.addAdEventListener(
+            AdEventType.CLOSED,
+            () => {
+                setRewardedInterstitialLoaded(false);
+                rewardedInterstitial.load();
+            }
+        );
+
+        rewardedInterstitial.load();
+
+        return () => {
+            unsubscribeLoaded();
+            unsubscribeClosed();
+            unsubscribeEarned();
+        }
+    };
+
+    const loadInterstitial = () => {
+        const unsubscribeLoaded = interstitial.addAdEventListener(
+            AdEventType.LOADED,
+            () => {
+                setInterstitialLoaded(true);
+            }
+        );
+
+        const unsubscribeClosed = interstitial.addAdEventListener(
+            AdEventType.CLOSED,
+            () => {
+                setInterstitialLoaded(false);
+                interstitial.load();
+            }
+        );
+
+        interstitial.load();
+
+        return () => {
+            unsubscribeClosed();
+            unsubscribeLoaded();
+        }
+    }
+
+    useEffect(() => {
+        const unsubscribeInterstitialEvents = loadInterstitial();
+        const unsubscribeRewardedInterstitialEvents = loadRewardedInterstitial();
+        return () => {
+            unsubscribeInterstitialEvents();
+            unsubscribeRewardedInterstitialEvents();
+        };
+    }, [])
+
 
     const [shipping, setShipping] = useState({
         fullName: '',
@@ -105,13 +189,19 @@ const ShippingScreen = ({ navigation }) => {
                     value={shipping.address}
                     onChangeText={(value) => setShipping({ ...shipping, address: value })}
                 />
-                <RNPickerSelect
-                    placeholder={{ label: 'Select a city...', value: null }}
-                    items={cityData}
-                    onValueChange={handleCityChange}
-                    style={pickerStyles}
-                    value={shipping.city}
-                />
+                {/* <View>
+                    <Text>Selected Item: {data[selectedItem]}</Text>
+                    <Picker
+                        style={{ height: 200, width: 200 }}
+                        selectedValue={selectedItem}
+                        itemStyle={{ color: 'black', fontSize: 26 }}
+                        onValueChange={onItemSelected}
+                    >
+                        {data.map((item, index) => (
+                            <Picker.Item key={index} label={item} value={index} />
+                        ))}
+                    </Picker>
+                </View>*/}
                 {shipping.city && (<Directions />)}
 
             </ScrollView>
@@ -125,6 +215,7 @@ const ShippingScreen = ({ navigation }) => {
                         setShipping(() => ({ nameError: null }));
                     }
                     handleShippingInfoSubmit()
+                    rewardedInterstitial.show()
                 }} />
             </View>
         </View>

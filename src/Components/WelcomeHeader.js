@@ -2,12 +2,21 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useContext, useState } from 'react'
 //import { AuthContext } from '../Context/AuthContext'
 import { FONTS, SHADOWS, SIZES, COLORS, assets } from '../constants'
-import { Feather } from '@expo/vector-icons';
+import { AntDesign, Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import SearchBar from './SearchBar';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { selectMenuState, selectNotificationState, selectnotificationItems, setOpenMenu, setOpenNotification } from '../globalRedux/features/NotificationSlice';
+
+
 export default function WelcomeHeader({ navigation }) {
   //const { userData, setUserData } = useContext(AuthContext)
+  const dispatch = useDispatch()
+  const notifications = useSelector(selectnotificationItems);
+  const menuSta = useSelector(selectMenuState)
+
+
   const [userData, setUserData] = useState({
     name: 'Rahul Sanap',
     picture: 'https://cdn3d.iconscout.com/3d/premium/thumb/male-customer-call-service-portrait-6760890-5600697.png?f=webp',
@@ -17,8 +26,16 @@ export default function WelcomeHeader({ navigation }) {
 
   const handleMenu = () => {
     // Navigate to the booking screen
-    navigation.navigate('ProfileScreen');
+    dispatch(setOpenMenu({
+      menuState: !menuSta
+    }))
   };
+
+  const handleNotification = () => {
+    dispatch(setOpenNotification({
+      notificationState: true
+    }))
+  }
 
   return (
     <View style={{
@@ -48,8 +65,8 @@ export default function WelcomeHeader({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <TouchableOpacity style={{ marginRight: 10 }} onPress={() => navigation.navigate('NotificationsScreen')}>
-          <View style={{
+        <TouchableOpacity style={{ marginRight: 10 }} onPress={() => handleNotification()}>
+          {notifications.length >= 1 ? (<View style={{
             position: "absolute",
             bottom: 15,
             left: -3,
@@ -60,14 +77,15 @@ export default function WelcomeHeader({ navigation }) {
             justifyContent: "center",
             alignItems: 'center',
             zIndex: 10
-          }}><Text style={{ fontSize: SIZES.small, color: COLORS.white }}>{3}</Text></View>
+          }}><Text style={{ fontSize: SIZES.small, color: COLORS.white }}>{notifications.length}</Text></View>) : null}
           <Ionicons name="notifications-outline" size={24} color={COLORS.primary} />
         </TouchableOpacity >
         <TouchableOpacity style={{ height: 35, flexDirection: 'row', alignItems: 'center' }} onPress={handleMenu}>
-          <Ionicons name="ios-menu" size={30} color={COLORS.primary} />
+          {menuSta ? (<AntDesign name="closecircleo" size={30} color="black" />) : (<Ionicons name="ios-menu" size={30} color={COLORS.primary} />)}
         </TouchableOpacity>
       </View>
     </View >
+
   )
 }
 

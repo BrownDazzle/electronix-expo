@@ -9,14 +9,14 @@ import { useEffect } from 'react';
 import ToastManager from 'expo-react-native-toastify';
 import CartItem from '../Components/cart/CartItem';
 
-const DetailsHeader = ({ items, navigation }) => {
+const DetailsHeader = ({ items, navigation, dispatch }) => {
   const [playing, setPlaying] = useState(false);
 
   /*useEffect(() => {
     setVideoChapter(param?.courseContent)
   }, [])
   */
-  const onClearCartItems = (dispatch) => {
+  const onClearCartItems = () => {
     dispatch(setClearCartItems())
   }
   const handleCart = () => {

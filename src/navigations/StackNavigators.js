@@ -20,7 +20,7 @@ import SignIn from '../screens/SIgnIn.js';
 import SignUp from '../screens/SignUp.js';
 import { Provider } from 'react-redux';
 import store from '../globalRedux/store.jsx';
-import NotificationsScreen from '../screens/NotificationsScreen.js';
+
 
 
 const Home = createNativeStackNavigator();
@@ -66,11 +66,6 @@ export function HomeStack() {
             <Home.Screen
                 name="ChatScreen"
                 component={ChatScreen}
-                options={{ headerShown: false }}
-            />
-            <Home.Screen
-                name="NotificationsScreen"
-                component={NotificationsScreen}
                 options={{ headerShown: false }}
             />
             {/*  <Home.Screen

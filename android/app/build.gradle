@@ -77,6 +77,8 @@ import com.android.build.OutputFile
  * ]
  */
 
+ compile project(':react-native-wheel-picker')
+
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
 
 def reactNativeRoot = new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim()).getParentFile().getAbsolutePath()

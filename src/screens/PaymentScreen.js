@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
 import { Icon, ListItem, ButtonGroup } from 'react-native-elements';
-import RNPickerSelect from 'react-native-picker-select';
 import CreditCardInput from 'react-native-credit-card';
 import { RectButton, CircleButton, PaymentGateway } from '../Components';
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from '../constants';
 import { Image } from 'react-native';
 import { popularProducts } from '../constants/dummy';
 import { FlatList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems, selectTotalAmount, selectTotalQTY } from '../globalRedux/features/CartSlice';
+import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
+import { setAddItemToNotifications } from '../globalRedux/features/NotificationSlice';
+
+
 
 const DetailsHeader = ({ items, navigation }) => {
     const [playing, setPlaying] = useState(false);
@@ -73,9 +76,11 @@ const CartProducts = ({ products }) => {
 
 const PaymentScreen = ({ route, navigation }) => {
     const { shipping } = route.params
+    const dispatch = useDispatch()
     const cartItems = useSelector(selectCartItems);
     const totalAmount = useSelector(selectTotalAmount);
     const totalQTY = useSelector(selectTotalQTY);
+
 
     const orderObj = {
         items: cartItems,
@@ -107,6 +112,12 @@ const PaymentScreen = ({ route, navigation }) => {
         // You can perform validation or API calls here
 
         navigation.navigate("SuccessScreen")
+        dispatch(setAddItemToNotifications({
+            id: 1,
+            title: 'Order succesfully made!',
+            subTitle: 'See details',
+            createdAt: Date.now()
+        }))
     };
 
     const filters = [
@@ -162,13 +173,13 @@ const PaymentScreen = ({ route, navigation }) => {
                         containerStyle={styles.filterButtonGroup}
                     />
                 </View>
-                {mobile && (<RNPickerSelect
+                {/*mobile && (<RNPickerSelect
                     placeholder={{ label: 'Select Network...', value: null }}
                     items={networkOptions}
                     onValueChange={handleNetworkChange}
                     style={pickerStyles}
                     value={network}
-                />)}
+                />)*/}
                 {mobile && network && (<TextInput
                     style={styles.input}
                     placeholder={`${network} Number`}

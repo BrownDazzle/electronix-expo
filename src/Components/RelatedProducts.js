@@ -28,7 +28,7 @@ export default function RelatedProducts() {
         setSlider(resp)
     }
     return (
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 20, paddingLeft: 15 }}>
             <ToastManager />
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingLeft: 10 }}>
                 <Text style={{

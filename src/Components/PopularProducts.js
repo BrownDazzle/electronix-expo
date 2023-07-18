@@ -28,7 +28,7 @@ export default function PopularProducts() {
         setSlider(resp)
     }
     return (
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 20, paddingLeft: 15 }}>
             <ToastManager />
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingLeft: 10 }}>
                 <Text style={{
@@ -37,7 +37,7 @@ export default function PopularProducts() {
                     fontSize: SIZES.large,
                     color: COLORS.primary,
                 }}>
-                    Popular Products
+                    Treding
                 </Text>
                 <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
             </View>

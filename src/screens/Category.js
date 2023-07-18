@@ -10,6 +10,10 @@ import ProductCard from '../Components/utils/ProductCard';
 import { RectButton } from '../Components/Button';
 import { BottomMenu } from '../Components';
 import ToastManager from 'expo-react-native-toastify';
+import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
+
+
+const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
 
 // Dummy data for categories
@@ -99,6 +103,7 @@ const Category = () => {
         <View style={styles.container}>
             <ToastManager style={{ top: 0 }} />
             <BottomMenu />
+
             <View style={{ flexDirection: "row", paddingHorizontal: 20, alignItems: "center" }}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ justifyContent: 'flex-start', marginRight: 50 }}>
                     <Ionicons name="arrow-back-sharp" size={24} color="black" />
@@ -124,10 +129,20 @@ const Category = () => {
                     containerStyle={styles.filterButtonGroup}
                 />
             </View>
+
             {/* Render products based on selected category and filter */}
             {/* Add your product list component or implementation here */}
             <ScrollView>
-                <View style={{ flex: 1, justifyContent: "center", marginBottom: 50 }}>
+                <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
+                </View>
+                <View style={{ flex: 1, justifyContent: "center", paddingLeft: 15 }}>
                     <FlatList
                         data={data?.slice(0, productCount)}
                         numColumns={2}
@@ -139,9 +154,29 @@ const Category = () => {
                             <RectButton title="More products" handlePress={handleCount} bgColor={COLORS.blueish} />
                         )}
                     </View>
-
+                    <View style={{ justifyContent: 'center', marginVertical: 20, width: '100%', paddingLeft: 50 }}>
+                        <BannerAd
+                            unitId={adUnitId}
+                            size={BannerAdSize.MEDIUM_RECTANGLE}
+                            requestOptions={{
+                                requestNonPersonalizedAdsOnly: true,
+                            }}
+                        />
+                    </View>
+                </View>
+                <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
                 </View>
             </ScrollView>
+            <View style={{ height: 50 }}>
+
+            </View>
         </View>
     );
 };
@@ -156,6 +191,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+        paddingLeft: 15
     },
     selectedCategoryItem: {
         backgroundColor: COLORS.blue,

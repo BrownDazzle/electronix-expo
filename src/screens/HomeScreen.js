@@ -12,11 +12,14 @@ import { ScrollView } from 'react-native'
 import CategoryList from '../Components/CategoryList'
 import PopularProducts from '../Components/PopularProducts'
 import BottomMenu from '../Components/BottomMenu'
-import DisplayAdScreen from '../Components/utils/DisplayAds'
-import GoogleAd from '../Components/utils/GoogleAd'
+import NotificationsPage from '../Components/Notifications'
 import ToastManager from 'expo-react-native-toastify'
 
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
+import { selectMenuState, selectNotificationState } from '../globalRedux/features/NotificationSlice'
+import { useSelector } from 'react-redux'
+import UsersMenu from '../Components/UserMenu'
+import StoreMenu from '../Components/Menu'
 
 const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
@@ -25,12 +28,42 @@ const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyy
 
 export default function HomeScreen() {
     //const { userData, setUserData } = useContext(AuthContext)
+    const ifCartState = useSelector(selectNotificationState);
+    const openMenu = useSelector(selectMenuState);
+
+    const handleProfilePress = () => {
+        // Handle profile press action
+        console.log('Profile pressed');
+    };
+
+    const handleSettingsPress = () => {
+        // Handle settings press action
+        console.log('Settings pressed');
+    };
+
+    const handleLogoutPress = () => {
+        // Handle logout press action
+        console.log('Logout pressed');
+    };
+
+
+
+    {/* Other app content */ }
+
+
 
     return (
         <>
             <ToastManager style={{ top: 0 }} />
             <WelcomeHeader />
             <BottomMenu />
+            {ifCartState ? (<NotificationsPage />) : null}
+            {openMenu ? (<StoreMenu />) : null}
+            {/** <UsersMenu
+                onProfilePress={handleProfilePress}
+                onSettingsPress={handleSettingsPress}
+                onLogoutPress={handleLogoutPress}
+            />/ */}
             <ScrollView style={{ paddingTop: 10 }}>
                 <Slider />
                 <CategoryList />
