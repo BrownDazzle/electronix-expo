@@ -1,34 +1,131 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { COLORS, FONTS, SIZES } from '../constants';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { AntDesign, Entypo, Feather, FontAwesome, Foundation, Ionicons, MaterialCommunityIcons, MaterialIcons, SimpleLineIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const StoreMenu = () => {
+    const navigation = useNavigation()
+    const [categoryOption, setCategoryOption] = useState([])
+    const [title, setTitle] = useState(false)
+
     const categories = [
-        'Category',
-        'New Arrivals',
-        'Trending',
-        'Nearest Store',
-        'Settings',
-        'Policy',
-        'Help',
+        {
+            name: 'Category',
+            icon: <Ionicons name="md-document-text-outline" size={24} color="black" />,
+            chevronIcon: <Ionicons name="arrow-down-circle-outline" size={24} color="black" />
+        },
+        {
+            name: 'New Arrivals',
+            screen: 'ArrivalsScreen',
+            icon: <Entypo name="price-tag" size={24} color="black" />,
+        },
+        {
+            name: 'Trending',
+            screen: 'TrendingScreen',
+            icon: <Ionicons name="ios-trending-up-outline" size={24} color="black" />,
+        },
+        {
+            name: 'Nearest Store',
+            screen: 'StoresScreen',
+            icon: <MaterialCommunityIcons name="map-marker-star-outline" size={24} color="black" />,
+        },
+        {
+            name: 'Settings',
+            screen: 'SettingsScreen',
+            icon: <Ionicons name="settings-outline" size={24} color="black" />,
+        },
+        {
+            name: 'Policy & Safety',
+            screen: 'PolicyScreen',
+            icon: <AntDesign name="Safety" size={24} color="black" />,
+        },
     ];
+
+    const subCategories = {
+        title: 'Category',
+        options: [
+            {
+                name: 'Phones',
+                path: 'phones',
+                icon: <MaterialIcons name="mobile-screen-share" size={24} color="black" />,
+            },
+            {
+                name: 'Computers',
+                path: 'computers',
+                icon: <Entypo name="laptop" size={24} color="black" />,
+            },
+            {
+                name: 'Headphones',
+                path: 'headphones',
+                icon: <Ionicons name="headset-outline" size={24} color="black" />,
+            },
+            {
+                name: 'Earphones',
+                path: 'earphones',
+                icon: <SimpleLineIcons name="earphones-alt" size={24} color="black" />,
+            },
+            {
+                name: 'Speakers',
+                path: 'speakers',
+                icon: <MaterialCommunityIcons name="speaker" size={24} color="black" />,
+            },
+            {
+                name: 'Accesories',
+                path: 'accessories',
+                icon: <AntDesign name="Safety" size={24} color="black" />,
+            },
+        ]
+    };
+
 
     const handleCategoryPress = (category) => {
         // Handle category press logic
-        console.log('Selected category:', category);
+        setCategoryOption(subCategories.options)
+        setTitle(true)
     };
+
+    useEffect(() => {
+        setCategoryOption(categories)
+    }, [])
 
     return (
         <View style={styles.container}>
-            {categories.map((category, index) => (
+            {categoryOption[0]?.name === 'Phones' ? (
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingRight: 12 }}>
+                    <Text
+                        style={{
+                            fontFamily: FONTS.bold,
+                            fontSize: SIZES.large,
+                            color: COLORS.primary,
+                            marginLeft: 18,
+                            marginBottom: 5,
+                            marginTop: 10
+                        }}
+                    >
+                        Category
+                    </Text>
+                    <TouchableOpacity onPress={() => setCategoryOption(categories)} style={{ paddingTop: 5 }}>
+                        <Ionicons name="arrow-up-circle-outline" size={28} color="black" />
+                    </TouchableOpacity>
+
+                </View>) : null}
+            {categoryOption.map((category, index) => (
                 <TouchableOpacity
                     key={index}
                     style={styles.categoryButton}
-                    onPress={() => handleCategoryPress(category)}
+                    onPress={category.chevronIcon ? (() => handleCategoryPress(category)) : (() => {
+                        if (categoryOption[0]?.name === 'Phones') {
+                            return () => navigation.navigate("Category-Screen", { category })
+                        } else {
+                            return () => navigation.navigate(`${category.screen}`)
+                        }
+                    })}
+
                 >
-                    <Ionicons name="notifications-outline" size={28} color={COLORS.primary} />
-                    <Text style={styles.categoryText}>{category}</Text>
+                    {category.icon}
+                    <Text style={styles.categoryText}>{category.name}</Text>
+                    {category.chevronIcon ? (category.chevronIcon) : null}
                 </TouchableOpacity>
             ))}
             <View style={{ borderTopWidth: 0.5, borderTopColor: COLORS.secondary, padding: 20, }}>
@@ -83,6 +180,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: FONTS.semiBold,
         marginLeft: 20,
+        marginRight: 70,
         color: COLORS.secondary
     },
 });
