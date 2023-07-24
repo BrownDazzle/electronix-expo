@@ -20,6 +20,9 @@ import SignIn from '../screens/SIgnIn.js';
 import SignUp from '../screens/SignUp.js';
 import { Provider } from 'react-redux';
 import store from '../globalRedux/store.jsx';
+import StoresScreen from '../screens/StoresScreen.js';
+import SettingsScreen from '../screens/SettingsScreen.js';
+import PolicyScreen from '../screens/PolicyScreen.js';
 
 
 
@@ -66,6 +69,21 @@ export function HomeStack() {
             <Home.Screen
                 name="ChatScreen"
                 component={ChatScreen}
+                options={{ headerShown: false }}
+            />
+            <Home.Screen
+                name="StoresScreen"
+                component={StoresScreen}
+                options={{ headerShown: false }}
+            />
+            <Home.Screen
+                name="SettingsScreen"
+                component={SettingsScreen}
+                options={{ headerShown: false }}
+            />
+            <Home.Screen
+                name="PolicyScreen"
+                component={PolicyScreen}
                 options={{ headerShown: false }}
             />
             {/*  <Home.Screen

@@ -51,7 +51,7 @@ export default function WelcomeHeader({ navigation }) {
 
         }}
       >
-        <TouchableOpacity onPress={handleMenu} style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}>
+        <TouchableOpacity style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center" }}>
           <Image source={assets.banner1} style={{ width: 45, height: 45, marginRight: 10, borderRadius: 100 }} />
           <Text
             style={{

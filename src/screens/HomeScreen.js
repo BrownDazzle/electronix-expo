@@ -23,9 +23,6 @@ import StoreMenu from '../Components/Menu'
 
 const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
-
-
-
 export default function HomeScreen() {
     //const { userData, setUserData } = useContext(AuthContext)
     const ifCartState = useSelector(selectNotificationState);

@@ -3,11 +3,15 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { COLORS, FONTS, SIZES } from '../constants';
 import { AntDesign, Entypo, Feather, FontAwesome, Foundation, Ionicons, MaterialCommunityIcons, MaterialIcons, SimpleLineIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { setOpenMenu } from '../globalRedux/features/NotificationSlice';
+import { useDispatch } from 'react-redux';
 
 const StoreMenu = () => {
     const navigation = useNavigation()
+    const dispatch = useDispatch()
     const [categoryOption, setCategoryOption] = useState([])
     const [title, setTitle] = useState(false)
+
 
     const categories = [
         {
@@ -17,12 +21,12 @@ const StoreMenu = () => {
         },
         {
             name: 'New Arrivals',
-            screen: 'ArrivalsScreen',
+            screen: "DetailScreen",
             icon: <Entypo name="price-tag" size={24} color="black" />,
         },
         {
             name: 'Trending',
-            screen: 'TrendingScreen',
+            screen: "DetailScreen",
             icon: <Ionicons name="ios-trending-up-outline" size={24} color="black" />,
         },
         {
@@ -40,6 +44,7 @@ const StoreMenu = () => {
             screen: 'PolicyScreen',
             icon: <AntDesign name="Safety" size={24} color="black" />,
         },
+
     ];
 
     const subCategories = {
@@ -81,7 +86,22 @@ const StoreMenu = () => {
 
     const handleCategoryPress = (category) => {
         // Handle category press logic
-        setCategoryOption(subCategories.options)
+        if (category.chevronIcon) setCategoryOption(subCategories.options)
+
+        if (categoryOption[0]?.name === 'Phones') {
+            navigation.navigate("Category-Screen", { category })
+
+            dispatch(setOpenMenu({
+                menuState: false
+            }))
+        } else if (!category.chevronIcon) {
+            navigation.navigate(`${category.screen}`)
+
+            dispatch(setOpenMenu({
+                menuState: false
+            }))
+        }
+
         setTitle(true)
     };
 
@@ -114,13 +134,7 @@ const StoreMenu = () => {
                 <TouchableOpacity
                     key={index}
                     style={styles.categoryButton}
-                    onPress={category.chevronIcon ? (() => handleCategoryPress(category)) : (() => {
-                        if (categoryOption[0]?.name === 'Phones') {
-                            return () => navigation.navigate("Category-Screen", { category })
-                        } else {
-                            return () => navigation.navigate(`${category.screen}`)
-                        }
-                    })}
+                    onPress={() => handleCategoryPress(category)}
 
                 >
                     {category.icon}
