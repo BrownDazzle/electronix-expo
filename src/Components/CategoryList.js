@@ -60,7 +60,7 @@ export default function CategoryList() {
                             <Text style={{
                                 fontSize: SIZES.small,
                                 fontWeight: FONTS.bold,
-                                color: COLORS.primary,
+                                color: COLORS.secondary,
                                 marginTop: 5
                             }}>
                                 {item.name}

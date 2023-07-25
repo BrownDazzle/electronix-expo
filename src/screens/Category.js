@@ -61,7 +61,7 @@ const Category = () => {
             borderWidth: 0.5,
             borderRadius: 5
         }} onPress={() => setSelectedCategory(item)}>
-            <Text style={{ padding: 5 }}>{item.name}</Text>
+            <Text style={item === selectedCategory ? { color: COLORS.white, padding: 5 } : { padding: 5 }}>{item.name}</Text>
         </TouchableOpacity>
     );
 
@@ -194,8 +194,9 @@ const styles = StyleSheet.create({
         paddingLeft: 15
     },
     selectedCategoryItem: {
-        backgroundColor: COLORS.blue,
-        borderColor: COLORS.secondary,
+        backgroundColor: COLORS.blueish,
+        borderColor: COLORS.blueish,
+        color: COLORS.white,
         marginHorizontal: 4,
         borderWidth: 0.5,
         borderRadius: 5

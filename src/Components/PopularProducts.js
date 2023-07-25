@@ -35,7 +35,7 @@ export default function PopularProducts() {
                     fontFamily: FONTS.bold,
                     fontWeight: FONTS.bold,
                     fontSize: SIZES.large,
-                    color: COLORS.primary,
+                    color: COLORS.secondary,
                 }}>
                     Treding
                 </Text>

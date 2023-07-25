@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Mailer from 'react-native-mail';
@@ -29,7 +30,7 @@ const Email = () => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={handleEmailPress} style={styles.emailButton}>
-                <Text style={styles.emailButtonText}>Send Email</Text>
+                <MaterialCommunityIcons name="email-edit-outline" size={30} color="black" />
             </TouchableOpacity>
         </View>
     );
@@ -38,13 +39,9 @@ const Email = () => {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        marginTop: 20,
     },
     emailButton: {
-        paddingVertical: 10,
         paddingHorizontal: 20,
-        backgroundColor: '#3498db',
-        borderRadius: 5,
     },
     emailButtonText: {
         color: '#fff',

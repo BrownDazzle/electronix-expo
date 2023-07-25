@@ -23,9 +23,10 @@ function BottomMenu() {
         }))
     }
 
-    const handleBookAppointment = () => {
+    const handleProfile = () => {
         // Navigate to the booking screen
-        navigation.navigate('BookingScreen');
+        navigation.navigate('ProfileScreen');
+        console.log("Profile")
     };
 
     return (
@@ -33,32 +34,32 @@ function BottomMenu() {
 
             <View style={styles.totalContainer}>
                 <TouchableOpacity onPress={() => handleNotification()/*navigation.navigate("HomeScreen")*/} >
-                    <MaterialCommunityIcons name="home-circle" size={34} color={COLORS.blueish} />
+                    <MaterialCommunityIcons name="home-circle" size={34} color={COLORS.primary} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate("ChatScreen")} >
-                    <AntDesign name="message1" size={24} color={COLORS.blueish} />
+                    <AntDesign name="message1" size={24} color={COLORS.primary} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate("Cart")} >
-                    <View style={{
+                    {cartItems.length >= 1 ? (<View style={{
                         position: "absolute",
                         bottom: 0,
                         left: -3,
                         height: 20,
                         width: 20,
                         borderRadius: 50,
-                        backgroundColor: COLORS.tertiary,
+                        backgroundColor: COLORS.primary,
                         justifyContent: "center",
                         alignItems: 'center',
                         zIndex: 10
-                    }}><Text style={{ fontSize: SIZES.small, color: COLORS.white }}>{cartItems.length}</Text></View>
-                    <FontAwesome5 name="opencart" size={30} color={COLORS.blueish} />
+                    }}><Text style={{ fontSize: SIZES.small, color: COLORS.white }}>{cartItems.length}</Text></View>) : null}
+                    <FontAwesome5 name="opencart" size={30} color={COLORS.primary} />
                 </TouchableOpacity>
                 <TouchableOpacity >
                     <Image
                         source={assets.person01}
                         resizeMode="contain"
                         style={{ width: 34, height: 34 }}
-                        onPress={() => navigation.navigate("EditProfileScreen")}
+                        onPress={() => handleProfile()}
                     />
                     <Image
                         source={assets.badge}
@@ -82,7 +83,7 @@ export default BottomMenu
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.primary,
         padding: 20,
     },
     title: {
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         position: 'absolute',
         zIndex: 10,
-        backgroundColor: 'white'
+        backgroundColor: COLORS.white
     },
     totalText: {
         fontSize: 18,

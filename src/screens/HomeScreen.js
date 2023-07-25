@@ -20,6 +20,7 @@ import { selectMenuState, selectNotificationState } from '../globalRedux/feature
 import { useSelector } from 'react-redux'
 import UsersMenu from '../Components/UserMenu'
 import StoreMenu from '../Components/Menu'
+import { COLORS } from '../constants'
 
 const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
@@ -61,7 +62,7 @@ export default function HomeScreen() {
                 onSettingsPress={handleSettingsPress}
                 onLogoutPress={handleLogoutPress}
             />/ */}
-            <ScrollView style={{ paddingTop: 10 }}>
+            <ScrollView style={{ paddingTop: 10, backgroundColor: COLORS.white }}>
                 <Slider />
                 <CategoryList />
                 <View style={{ justifyContent: 'center', marginVertical: 20 }}>

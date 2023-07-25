@@ -98,7 +98,16 @@ function StoresScreen() {
                         For any inquiries or assistance, please feel free to contact us at:
                     </Text>
                     <Text style={styles.contactInfo}>Email: customerservice@example.com</Text>
-                    <Email />
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{
+                            marginRight: 0, fontSize: SIZES.large,
+                            marginBottom: 5,
+                            color: COLORS.tertiary,
+                            fontWeight: FONTS.light
+                        }}>Email us now !</Text>
+                        <Email />
+                    </View>
+
                     <Text style={styles.contactInfo}>Phone: +1 (123) 456-7890</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={{
@@ -167,7 +176,7 @@ const styles = StyleSheet.create({
     },
     callButton: {
         paddingHorizontal: 20,
-        paddingVertical: 10,
+        paddingVertical: 5,
         backgroundColor: COLORS.white,
         borderRadius: 60,
         width: 80

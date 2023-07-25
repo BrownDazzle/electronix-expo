@@ -52,7 +52,7 @@ export default function Login() {
   }
   return (
     <View>
-      <Image source={require('./../Assets/Images/login.png')} />
+      {/*<Image source={require('../assets/images/login.png')} />*/}
       <View style={styles.container}>
         <Text style={styles.welcomeText}>Welcome to ELECTRONIX STORE</Text>
         <Text style={{

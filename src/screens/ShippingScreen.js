@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-//import Picker from 'react-native-wheel-picker';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, StatusBar, ScrollView } from 'react-native';
 import { RectButton, CircleButton, Directions } from '../Components';
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from '../constants';
 import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
+import { Picker } from '@react-native-picker/picker';
 
 
 const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
@@ -16,12 +16,8 @@ const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(TestIds.R
 
 const DetailsHeader = ({ items, navigation }) => {
     const [playing, setPlaying] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(0);
-    const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 
-    const onItemSelected = (index) => {
-        setSelectedItem(index);
-    };
+
     /*useEffect(() => {
       setVideoChapter(param?.courseContent)
     }, [])
@@ -59,6 +55,12 @@ const DetailsHeader = ({ items, navigation }) => {
 const ShippingScreen = ({ navigation }) => {
     const [interstitialLoaded, setInterstitialLoaded] = useState(false);
     const [rewardedInterstitialLoaded, setRewardedInterstitialLoaded] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(0);
+    const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+
+    const onItemSelected = (index) => {
+        setSelectedItem(index);
+    };
 
     const loadRewardedInterstitial = () => {
         const unsubscribeLoaded = rewardedInterstitial.addAdEventListener(
@@ -191,6 +193,17 @@ const ShippingScreen = ({ navigation }) => {
                 />
                 {/* <View>
                     <Text>Selected Item: {data[selectedItem]}</Text>
+
+                    <Picker
+                        placeholder={{ label: 'Select Network...', value: null }}
+                        selectedValue={selectedItem}
+                        onValueChange={onItemSelected}
+                        mode="dropdown"
+                    >
+                        {data.map((item, index) => (
+                            <Picker.Item key={index} label={item} value={item} />
+                        ))}
+                    </Picker>
                     <Picker
                         style={{ height: 200, width: 200 }}
                         selectedValue={selectedItem}
@@ -200,7 +213,7 @@ const ShippingScreen = ({ navigation }) => {
                         {data.map((item, index) => (
                             <Picker.Item key={index} label={item} value={index} />
                         ))}
-                    </Picker>
+                        </Picker>
                 </View>*/}
                 {shipping.city && (<Directions />)}
 
