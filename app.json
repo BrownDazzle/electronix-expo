@@ -19,9 +19,9 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.blueprint",
+      "bundleIdentifier": "com.electronics",
       "config": {
-        "googleMapsApiKey": "AIzaSyBQivdVNxU7quHhW_ARw2VuXKmHVwXhNMk"
+        "googleMapsApiKey": "AIzaSyABnmmFgtKFmnYkTW-CS21ISZtNeFv3uZc"
       }
     },
     "android": {
@@ -29,7 +29,7 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.blueprint",
+      "package": "com.electronics",
       "config": {
         "googleMaps": {
           "apiKey": "KEY"

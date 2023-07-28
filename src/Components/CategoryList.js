@@ -6,7 +6,7 @@ import { Image } from 'react-native';
 import { Dimensions } from 'react-native';
 import { categoryData } from '../constants/dummy';
 import { FONTS, SHADOWS, SIZES, COLORS } from '../constants'
-import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, Entypo, Ionicons, MaterialCommunityIcons, MaterialIcons, SimpleLineIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -32,31 +32,54 @@ export default function CategoryList() {
         navigation.navigate('Category-Screen', { category })
     }
 
+    const subCategories = {
+        title: 'Category',
+        options: [
+            {
+                name: 'Phones',
+                path: 'phones',
+                icon: <MaterialIcons name="mobile-screen-share" size={44} color="black" />,
+            },
+            {
+                name: 'Computers',
+                path: 'computers',
+                icon: <Entypo name="laptop" size={44} color="black" />,
+            },
+            {
+                name: 'Headphones',
+                path: 'headphones',
+                icon: <Ionicons name="headset-outline" size={44} color="black" />,
+            },
+            {
+                name: 'Earphones',
+                path: 'earphones',
+                icon: <SimpleLineIcons name="earphones-alt" size={44} color="black" />,
+            },
+            {
+                name: 'Speakers',
+                path: 'speakers',
+                icon: <MaterialCommunityIcons name="speaker" size={44} color="black" />,
+            },
+            {
+                name: 'Accesories',
+                path: 'accessories',
+                icon: <AntDesign name="Safety" size={44} color="black" />,
+            },
+        ]
+    };
+
     return (
         <View style={{ marginTop: 10, paddingLeft: 20 }}>
             <FlatList
-                data={categoryData}
+                data={subCategories.options}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
                     <>
                         <TouchableOpacity key={item.id} style={{
-                            justifyContent: "center", alignItems: "center", marginRight: 8, paddingBottom: 10, marginBottom: 5
+                            justifyContent: "center", alignItems: "center", marginRight: 18, paddingBottom: 10, marginBottom: 5
                         }} onPress={() => onPressCategory(item.name)}>
-                            <Image source={item.cover}
-                                style={{
-                                    width: 100
-                                    , height: 100, borderRadius: 20,
-                                    shadowColor: '#000',
-                                    shadowOffset: {
-                                        width: 0,
-                                        height: 2,
-                                    },
-                                    shadowOpacity: 0.25,
-                                    shadowRadius: 3.84,
-                                    elevation: 5, backgroundColor: '#fff',
-                                }}
-                            />
+                            {item.icon}
                             <Text style={{
                                 fontSize: SIZES.small,
                                 fontWeight: FONTS.bold,

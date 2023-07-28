@@ -13,8 +13,8 @@ function MapComponent() {
   const longitude = 28.285184;
 
 
-  const [userDestination, setUserDestination] = useState({ latitude: latitude, longitude: longitude })
-  const [userOrigin, setUserOrigin] = useState({ latitude: -15.355798, longitude: 28.285184 })
+  const userDestination = { latitude: latitude, longitude: longitude }
+  const userOrigin = { latitude: -15.355798, longitude: 28.183187 }
 
   const [state, setState] = useState({
 
@@ -23,7 +23,7 @@ function MapComponent() {
   const _map = React.createRef(35)
 
 
-  const componentDidUpdate = () => {
+  /*const componentDidUpdate = () => {
     setTimeout(() => {
       if (userDestination.latitude !== null) {
         _map?.current?.fitToCoordinates(
@@ -38,8 +38,9 @@ function MapComponent() {
 
   useEffect(() => {
     componentDidUpdate()
-  }, [userDestination])
+  }, [userDestination])*/
 
+  const GOOGLE_MAPSKey = "AIzaSyABnmmFgtKFmnYkTW-CS21ISZtNeFv3uZc"
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 300, }}>
@@ -47,7 +48,7 @@ function MapComponent() {
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         customMapStyle={mapStyle}
-        ref={_map}
+      // ref={_map}
       >
         {userOrigin.latitude != null &&
 
@@ -73,7 +74,7 @@ function MapComponent() {
           <MapViewDirections
             origin={userOrigin}
             destination={userDestination}
-            apikey={GOOGLE_MAPS_APIKEY}
+            apikey={GOOGLE_MAPSKey}
             strokeWidth={4}
             strokeColor={colors.black}
           />

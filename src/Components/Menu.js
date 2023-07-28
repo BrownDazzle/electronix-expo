@@ -21,12 +21,12 @@ const StoreMenu = () => {
         },
         {
             name: 'New Arrivals',
-            screen: "DetailScreen",
+            screen: "Category-Screen",
             icon: <Entypo name="price-tag" size={24} color="black" />,
         },
         {
             name: 'Trending',
-            screen: "DetailScreen",
+            screen: "Category-Screen",
             icon: <Ionicons name="ios-trending-up-outline" size={24} color="black" />,
         },
         {
@@ -89,13 +89,13 @@ const StoreMenu = () => {
         if (category.chevronIcon) setCategoryOption(subCategories.options)
 
         if (categoryOption[0]?.name === 'Phones') {
-            navigation.navigate("Category-Screen", { category })
+            navigation.navigate("Category-Screen", { category: category.name })
 
             dispatch(setOpenMenu({
                 menuState: false
             }))
         } else if (!category.chevronIcon) {
-            navigation.navigate(`${category.screen}`)
+            navigation.navigate(`${category.screen}`, { category: category.name })
 
             dispatch(setOpenMenu({
                 menuState: false

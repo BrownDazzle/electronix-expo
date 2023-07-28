@@ -44,9 +44,11 @@ const filters = [
     // Add more filters as needed
 ];
 
-const Category = () => {
+const Category = ({ route }) => {
+    const { category } = route.params
     const navigation = useNavigation()
     const [data, setData] = useState([])
+    const [categoryList, setCategoryList] = useState([])
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
     const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
     const [productCount, setProductCount] = useState(4);
@@ -61,7 +63,7 @@ const Category = () => {
             borderWidth: 0.5,
             borderRadius: 5
         }} onPress={() => setSelectedCategory(item)}>
-            <Text style={item === selectedCategory ? { color: COLORS.white, padding: 5 } : { padding: 5 }}>{item.name}</Text>
+            <Text style={item === selectedCategory ? { color: COLORS.white, padding: 5 } : { padding: 5 }}>{item}</Text>
         </TouchableOpacity>
     );
 
@@ -96,6 +98,13 @@ const Category = () => {
     }
 
     useEffect(() => {
+        categoryData.map((categ) => {
+            if (categ.name === category) setCategoryList(categ.brands)
+        })
+    }, [category])
+
+
+    useEffect(() => {
         setData(products)
     }, [products])
 
@@ -108,14 +117,13 @@ const Category = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ justifyContent: 'flex-start', marginRight: 50 }}>
                     <Ionicons name="arrow-back-sharp" size={24} color="black" />
                 </TouchableOpacity>
-                <Text style={{ alignItems: "center", fontSize: SIZES.large, fontWeight: FONTS.bold, marginBottom: 3, color: COLORS.secondary, textTransform: "uppercase", justifyContent: 'center' }}>Phone Stock</Text>
+                <Text style={{ alignItems: "center", fontSize: SIZES.large, fontWeight: FONTS.bold, marginBottom: 3, color: COLORS.secondary, textTransform: "uppercase", justifyContent: 'center' }}>{category} Stock</Text>
             </View>
 
             <View style={styles.headerContainer}>
                 <FlatList
-                    data={categoryData}
+                    data={categoryList}
                     renderItem={renderCategoryItem}
-                    keyExtractor={(item) => item.id.toString()}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                 />
