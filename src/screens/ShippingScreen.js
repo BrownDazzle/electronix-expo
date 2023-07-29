@@ -4,6 +4,9 @@ import { RectButton, CircleButton, Directions } from '../Components';
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from '../constants';
 import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
 import { Picker } from '@react-native-picker/picker';
+import InputError from '../Components/utils/InputError';
+import Dropdown from '../Components/utils/DropdownSelect';
+import { MultipleSelect, SingleSelect } from '../Components/utils/Select';
 
 
 const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
@@ -56,7 +59,12 @@ const ShippingScreen = ({ navigation }) => {
     const [interstitialLoaded, setInterstitialLoaded] = useState(false);
     const [rewardedInterstitialLoaded, setRewardedInterstitialLoaded] = useState(false);
     const [selectedItem, setSelectedItem] = useState(0);
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [inputValue, setInputValue] = useState('');
     const data = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+
+    const [selected, setSelected] = useState(undefined);
+
 
     const onItemSelected = (index) => {
         setSelectedItem(index);
@@ -129,23 +137,24 @@ const ShippingScreen = ({ navigation }) => {
 
 
     const [shipping, setShipping] = useState({
-        fullName: '',
-        address: '',
-        city: '',
-        phoneNumber: ''
+        fullName: 'Collins',
+        address: '140/3 LA',
+        city: 'Ndola',
+        phoneNumber: '098977676'
     })
 
     const cityData = [
-        { label: "Lusaka", value: "Lusaka" },
-        { label: "Kitwe", value: "Kitwe" },
-        { label: "Kabwe", value: "Kabwe" },
-        { label: "Chingola", value: "Chingola" },
-        { label: "Mufulira", value: "Mufulira" },
-        { label: "Livingstone", value: "Livingstone" },
-        { label: "Luanshya", value: "Luanshya" },
-        { label: "Chipata", value: "Chipata" },
-        { label: "Kasama", value: "Kasama" },
-        { label: "Ndola", value: "Ndola" },
+        { key: 0, value: "Choose City", disabled: true },
+        { key: 1, value: "Lusaka" },
+        { key: 2, value: "Kitwe" },
+        { key: 3, value: "Kabwe" },
+        { key: 4, value: "Chingola" },
+        { key: 5, value: "Mufulira" },
+        { key: 6, value: "Livingstone" },
+        { key: 7, value: "Luanshya" },
+        { key: 8, value: "Chipata" },
+        { key: 9, value: "Kasama" },
+        { key: 10, value: "Ndola" },
         // Add more cities as needed
     ];
 
@@ -157,9 +166,29 @@ const ShippingScreen = ({ navigation }) => {
     const handleShippingInfoSubmit = () => {
         // Handle the shipping information submission
         // You can perform validation or API calls here
+        if (!shipping.fullName) {
+            setErrorMessage('Full name required!')
+            setInputValue('fullName')
+            return
+        }
 
-
-        navigation.navigate("Payment", { shipping })
+        if (!shipping.phoneNumber) {
+            setErrorMessage('Phone number required!')
+            setInputValue('phoneNumber')
+            return
+        }
+        if (!shipping.address) {
+            setErrorMessage('Address required!')
+            setInputValue('address')
+            return
+        }
+        if (!shipping.city) {
+            setErrorMessage('City required!')
+            setInputValue('city')
+            return
+        }
+        if (shipping.address && shipping.city && shipping.fullName && shipping.phoneNumber) navigation.navigate("Payment", { shipping })
+        rewardedInterstitial.show()
     };
 
 
@@ -169,52 +198,35 @@ const ShippingScreen = ({ navigation }) => {
 
             <DetailsHeader />
             <ScrollView>
+                {!shipping.fullName && inputValue === "fullName" && errorMessage ? (<InputError error={errorMessage} />) : (null)}
+                <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.semiBold, color: COLORS.secondary, marginBottom: 5, marginLeft: 10 }}>Full Name</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Full Name"
+                    placeholder='Full Name'
                     value={shipping.fullName}
                     onChangeText={(value) => setShipping({ ...shipping, fullName: value })}
 
                 />
-                {!!shipping.nameError && (
-                    <Text style={{ color: "red" }}>{shipping.nameError}</Text>
-                )}
+                {!shipping.phoneNumber && inputValue === "phoneNumber" && errorMessage ? (<InputError error={errorMessage} />) : (null)}
+                <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.semiBold, color: COLORS.secondary, marginBottom: 5, marginLeft: 10 }}>Phone Number</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Phone Number"
+                    placeholder='Phone Number'
                     value={shipping.phoneNumber}
                     onChangeText={(value) => setShipping({ ...shipping, phoneNumber: value })}
                 />
+                {!shipping.address && inputValue === "address" && errorMessage ? (<InputError error={errorMessage} />) : (null)}
+                <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.semiBold, color: COLORS.secondary, marginBottom: 5, marginLeft: 10 }}>Address</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Local Address"
+                    placeholder='Local Address'
                     value={shipping.address}
                     onChangeText={(value) => setShipping({ ...shipping, address: value })}
                 />
-                {/* <View>
-                    <Text>Selected Item: {data[selectedItem]}</Text>
-
-                    <Picker
-                        placeholder={{ label: 'Select Network...', value: null }}
-                        selectedValue={selectedItem}
-                        onValueChange={onItemSelected}
-                        mode="dropdown"
-                    >
-                        {data.map((item, index) => (
-                            <Picker.Item key={index} label={item} value={item} />
-                        ))}
-                    </Picker>
-                    <Picker
-                        style={{ height: 200, width: 200 }}
-                        selectedValue={selectedItem}
-                        itemStyle={{ color: 'black', fontSize: 26 }}
-                        onValueChange={onItemSelected}
-                    >
-                        {data.map((item, index) => (
-                            <Picker.Item key={index} label={item} value={index} />
-                        ))}
-                        </Picker>
-                </View>*/}
+                <View>
+                    <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.semiBold, color: COLORS.secondary, marginBottom: 5, marginLeft: 10 }}>City</Text>
+                    <SingleSelect data={cityData} shipping={shipping} setShipping={setShipping} />
+                </View>
                 {shipping.city && (<Directions />)}
 
             </ScrollView>
@@ -222,13 +234,8 @@ const ShippingScreen = ({ navigation }) => {
             <View style={styles.totalContainer}>
                 <RectButton title='Back' bgColor={COLORS.primary} minWidth='40%' handlePress={() => navigation.goBack()} />
                 <RectButton title='Go To Payment' bgColor={COLORS.tertiary} minWidth='40%' handlePress={() => {
-                    if (shipping.fullName.trim() === "") {
-                        setShipping(() => ({ nameError: "Input required." }));
-                    } else {
-                        setShipping(() => ({ nameError: null }));
-                    }
                     handleShippingInfoSubmit()
-                    rewardedInterstitial.show()
+
                 }} />
             </View>
         </View>

@@ -54,12 +54,12 @@ function BottomMenu() {
                     }}><Text style={{ fontSize: SIZES.small, color: COLORS.white }}>{cartItems.length}</Text></View>) : null}
                     <FontAwesome5 name="opencart" size={30} color={COLORS.primary} />
                 </TouchableOpacity>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={() => handleProfile()}>
                     <Image
                         source={assets.person01}
                         resizeMode="contain"
                         style={{ width: 34, height: 34 }}
-                        onPress={() => handleProfile()}
+
                     />
                     <Image
                         source={assets.badge}

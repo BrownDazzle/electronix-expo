@@ -8,6 +8,7 @@ import { selectCartItems, selectCartState, selectTotalAmount, selectTotalQTY, se
 import { useEffect } from 'react';
 import ToastManager from 'expo-react-native-toastify';
 import CartItem from '../Components/cart/CartItem';
+import CartEmpty from '../Components/cart/CartEmpty';
 
 const DetailsHeader = ({ items, navigation, dispatch }) => {
   const [playing, setPlaying] = useState(false);
@@ -113,23 +114,29 @@ const CartScreen = ({ navigation }) => {
   }
 
   return (
+
     <View style={styles.container}>
       <ToastManager style={{ top: 0 }} />
       <DetailsHeader items={cartItems.length} dispatch={dispatch} />
-      <FlatList
-        data={cartItems}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.cartList}
-      />
-      <View style={styles.totalContainer}>
-        <View style={{ justifyContent: "center", flexDirection: "row", marginBottom: 5, alignItems: "center" }}>
-          <Text style={styles.totalText}>Total:</Text>
-          <Text style={styles.totalAmount}>K{totalAmount}</Text>
-        </View>
-        <RectButton title='Process Payment' bgColor={COLORS.tertiary} minWidth='80%' handlePress={handlePayment} />
-      </View>
+      {cartItems.length === 0 ? (<CartEmpty />) : (
+        <>
+          <FlatList
+            data={cartItems}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+            contentContainerStyle={styles.cartList}
+          />
+          <View style={styles.totalContainer}>
+            <View style={{ justifyContent: "center", flexDirection: "row", marginBottom: 5, alignItems: "center" }}>
+              <Text style={styles.totalText}>Total:</Text>
+              <Text style={styles.totalAmount}>K{totalAmount}</Text>
+            </View>
+            <RectButton title='Process Payment' bgColor={COLORS.tertiary} minWidth='80%' handlePress={handlePayment} />
+          </View>
+        </>
+      )}
     </View>
+
   );
 };
 

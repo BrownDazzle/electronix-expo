@@ -11,8 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems, selectTotalAmount, selectTotalQTY } from '../globalRedux/features/CartSlice';
 import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
 import { setAddItemToNotifications } from '../globalRedux/features/NotificationSlice';
+import Dropdown from '../Components/utils/DropdownSelect';
+import { AdvancedSelect, SingleSelect } from '../Components/utils/Select';
 
-
+const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
 const DetailsHeader = ({ items, navigation }) => {
     const [playing, setPlaying] = useState(false);
@@ -51,15 +53,12 @@ const CartProducts = ({ products }) => {
 
     const renderItem = ({ item }) => (
         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-            <View style={{ flexDirection: 'row' }}>
-                <Image source={item.image} style={{ width: 180, height: 90, resizeMode: "contain", marginRight: 10 }} />
-                <Text style={{ position: 'absolute', bottom: 12, right: 35, fontSize: SIZES.font, fontWeight: FONTS.bold, color: COLORS.secondary }}>Qty {item.cartQuantity}</Text>
-            </View>
-
+            <Image source={item.image} style={{ width: 180, height: 90, resizeMode: "contain", marginRight: 10 }} />
             <View style={{ flexDirection: 'column' }}>
                 <Text style={{ fontSize: 20, fontWeight: FONTS.light }}>{item.title}</Text>
                 <Text style={{ fontSize: SIZES.small, fontWeight: FONTS.semiBold }}>{item.manufacturer}</Text>
                 <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold }}>K{item.price}</Text>
+                <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.bold, color: COLORS.secondary }}>Qty {item.cartQuantity}</Text>
             </View>
         </View>
     )
@@ -132,6 +131,14 @@ const PaymentScreen = ({ route, navigation }) => {
         { label: "Zamtel", value: "Zamtel" },
     ]
 
+    const networkData = [
+        { key: 1, value: "Choose Network", disabled: true },
+        { key: 2, value: "Airtel" },
+        { key: 3, value: "MTN" },
+        { key: 4, value: "Zamtel" },
+    ]
+
+
     const handleNetworkChange = (value) => {
         setNetwork(value);
         // Perform additional logic based on network selection if needed
@@ -144,56 +151,64 @@ const PaymentScreen = ({ route, navigation }) => {
         index === 1 ? SetCard(true) : SetCard(false)
     }
 
+    useEffect(() => {
+        if (cartItems === 0) navigation.navigate('HomeScreen')
+    }, [cartItems])
+
     return (
         <View style={styles.container}>
             <DetailsHeader />
             {/* Shipping Information */}
             <ScrollView>
                 <CartProducts products={cartItems} />
-                <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold, marginVertical: 10 }}>Shipping Contact</Text>
-                <View style={{ padding: 10, width: '100%', borderWidth: 0.5, borderColor: COLORS.secondary, borderRadius: 10 }}>
-
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold, marginRight: 4 }}>Name :</Text>
-                        <Text style={{ fontSize: SIZES.small, fontWeight: FONTS.bold }}>{shipping.fullName}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold, marginRight: 4 }}>Phone Number :</Text>
-                        <Text style={{ fontSize: SIZES.small, fontWeight: FONTS.bold }}>{shipping.phoneNumber}</Text>
-                    </View>
-                </View>
-                {/* Payment Options */}
-                <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold, marginVertical: 10 }}>Choose Payment Method</Text>
-                <View style={styles.filterContainer}>
-                    <ButtonGroup
-                        buttons={filters.map((filter) => filter.name)}
-                        selectedIndex={selectedFilterIndex}
-                        onPress={(index) => handlePaymentMethod(index)}
-                        selectedButtonStyle={styles.selectedFilterButton}
-                        containerStyle={styles.filterButtonGroup}
+                <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
                     />
                 </View>
-                {/*mobile && (<RNPickerSelect
-                    placeholder={{ label: 'Select Network...', value: null }}
-                    items={networkOptions}
-                    onValueChange={handleNetworkChange}
-                    style={pickerStyles}
-                    value={network}
-                />)*/}
-                {mobile && network && (<TextInput
-                    style={styles.input}
-                    placeholder={`${network} Number`}
-                    value={cardNumber}
-                    onChangeText={setCardNumber}
-                />)}
-                {card && (<CreditCardInput
-                    requiresName
-                    requiresCVC
-                    cardScale={1}
-                    onChange={(data) => setCreditCardData(data)}
-                    style={{ alignSelf: 'center', marginBottom: 5 }}
-                />)}
+                <View style={{ paddingHorizontal: 20 }}>
+                    <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold, marginVertical: 10 }}>Shipping Contact</Text>
+                    <View style={{ padding: 10, width: '100%', borderWidth: 0.5, borderColor: COLORS.secondary, borderRadius: 10 }}>
 
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.semiBold, marginRight: 4 }}>Name :</Text>
+                            <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.bold }}>{shipping.fullName}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.semiBold, marginRight: 4 }}>Phone Number :</Text>
+                            <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.bold }}>{shipping.phoneNumber}</Text>
+                        </View>
+                    </View>
+                    {/* Payment Options */}
+                    <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold, marginVertical: 10 }}>Choose Payment Method</Text>
+                    <View style={styles.filterContainer}>
+                        <ButtonGroup
+                            buttons={filters.map((filter) => filter.name)}
+                            selectedIndex={selectedFilterIndex}
+                            onPress={(index) => handlePaymentMethod(index)}
+                            selectedButtonStyle={styles.selectedFilterButton}
+                            containerStyle={styles.filterButtonGroup}
+                        />
+                    </View>
+                    {mobile && (<AdvancedSelect data={networkData} state={network} setState={setNetwork} />)}
+                    {mobile && network && (<TextInput
+                        style={styles.input}
+                        placeholder={`${network} Number`}
+                        value={cardNumber}
+                        onChangeText={setCardNumber}
+                    />)}
+                    {card && (<CreditCardInput
+                        requiresName
+                        requiresCVC
+                        cardScale={1}
+                        onChange={(data) => setCreditCardData(data)}
+                        style={{ alignSelf: 'center', marginBottom: 5 }}
+                    />)}
+                </View>
             </ScrollView>
 
             <View style={styles.totalContainer}>
@@ -207,7 +222,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        padding: 20,
     },
     title: {
         fontSize: 24,
@@ -225,6 +239,7 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         borderRadius: 8,
         padding: 10,
+        marginTop: 10,
         marginBottom: 10,
     },
     button: {
