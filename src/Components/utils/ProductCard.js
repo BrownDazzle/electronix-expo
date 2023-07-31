@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => onPressProduct(product)}>
-                <Image source={product.image} style={styles.image} />
+                <Image source={product.image[0]} style={styles.image} />
             </TouchableOpacity>
             <View>
                 <NFTTitle

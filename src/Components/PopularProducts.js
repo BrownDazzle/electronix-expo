@@ -37,7 +37,7 @@ export default function PopularProducts() {
                     fontSize: SIZES.large,
                     color: COLORS.secondary,
                 }}>
-                    Treding
+                    Trending
                 </Text>
                 <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
             </View>

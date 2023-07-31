@@ -19,7 +19,7 @@ const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(TestIds.R
     requestNonPersonalizedAdsOnly: true
 });
 
-const DetailsHeader = ({ data, navigation }) => {
+const DetailsHeader = ({ data, currentIndex, navigation }) => {
     const [playing, setPlaying] = useState(false);
     /*useEffect(() => {
       setVideoChapter(param?.courseContent)
@@ -40,7 +40,8 @@ const DetailsHeader = ({ data, navigation }) => {
 
 
         <View style={{ width: "100%", height: 320 }}>
-            <Player />
+            <Image source={data.image[currentIndex]} style={{ width: "100%", height: 300, resizeMode: 'center', marginTop: 40, marginBottom: 20 }} />
+            {/* <Player />*/}
             <CircleButton
                 imgUrl={assets.left}
                 handlePress={() => navigation.goBack()}
@@ -55,6 +56,7 @@ const DetailScreen = ({ route, navigation }) => {
     const { product } = route.params
     const dispatch = useDispatch()
     const scrollViewRef = useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(0)
 
     const [rewardedInterstitialLoaded, setRewardedInterstitialLoaded] = useState(false);
 
@@ -136,8 +138,8 @@ const DetailScreen = ({ route, navigation }) => {
             <BottomMenu />
             <ScrollView >
 
-                <DetailsHeader data={product} navigation={navigation} />
-                <SubInfo data={product} />
+                <DetailsHeader data={product} currentIndex={currentIndex} navigation={navigation} />
+                <SubInfo data={product} setCurrentIndex={setCurrentIndex} currentIndex={currentIndex} />
                 <View style={{ marginTop: 20, flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}>
                     <TouchableOpacity onPress={() => onAddToCart()} style={{ paddingVertical: 5, paddingHorizontal: 15, borderRadius: 8, color: COLORS.white, backgroundColor: COLORS.tertiary, fontSize: SIZES.font, fontWeight: FONTS.semiBold }}>
                         <FontAwesome5 name="plus" size={12} color={COLORS.white} style={{
@@ -149,7 +151,7 @@ const DetailScreen = ({ route, navigation }) => {
                         <FontAwesome5 name="opencart" size={25} color={COLORS.white} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { handleBuy(); rewardedInterstitial.show() }}>
-                        <Text style={{ paddingVertical: 8, paddingHorizontal: 12, borderRadius: 8, color: COLORS.white, backgroundColor: COLORS.tertiary, fontSize: SIZES.medium, fontWeight: FONTS.bold }}>Buy Now</Text>
+                        <Text style={{ paddingVertical: 8, paddingHorizontal: 12, borderRadius: 8, color: COLORS.white, backgroundColor: COLORS.blueish, fontSize: SIZES.medium, fontWeight: FONTS.bold }}>Buy Now</Text>
                     </TouchableOpacity>
                     <View style={{ flexDirection: "row", justifyContent: 'space-around', marginTop: 5 }}>
                         <TouchableOpacity style={{ marginRight: 10 }} onPress={() => onDecreaseItemQTY()}>
@@ -195,7 +197,7 @@ const DetailScreen = ({ route, navigation }) => {
                     />
                 </View>
 
-                <CustomerFeed />
+                {/*<CustomerFeed />
                 <View style={{ justifyContent: 'center', marginVertical: 10, paddingLeft: 50 }}>
                     <BannerAd
                         unitId={adUnitId}
@@ -204,7 +206,7 @@ const DetailScreen = ({ route, navigation }) => {
                             requestNonPersonalizedAdsOnly: true,
                         }}
                     />
-                </View>
+                </View>*/}
                 <View style={{ height: 50 }}>
 
                 </View>

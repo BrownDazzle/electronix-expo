@@ -3,10 +3,8 @@ import { View, Image, Text } from "react-native";
 
 import { SIZES, FONTS, COLORS, SHADOWS, assets } from "../constants";
 import { data } from "../global/data";
-
-import img1 from "../../assets/barbercut3.jpg"
-import img2 from "../../assets/barbercut2.jpg"
-import img3 from "../../assets/barbercut4.jpg"
+import { Touchable } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 
 export const NFTTitle = ({ title, subTitle, titleSize, subTitleSize }) => {
@@ -49,7 +47,7 @@ export const EthPrice = ({ price }) => {
           color: COLORS.tertiary,
         }}
       >
-        {price}
+        K{price}
       </Text>
     </View>
   );
@@ -63,22 +61,23 @@ const ImageCmp = ({ imgUrl, index }) => {
       style={{
         width: 88,
         height: 88,
-        marginLeft: index === 0 ? 0 : -SIZES.font,
         borderRadius: 20
       }}
     />
   );
 };
 
-export const People = () => {
+export const People = ({ images, setCurrentIndex, currentIndex }) => {
   return (
     <View style={{ flexDirection: "row" }}>
-      {[img1, img2, img3].map(
+      {images.map(
         (imgUrl, index) => (
-          <ImageCmp imgUrl={imgUrl} index={index} key={`People-${index}`} />
+          <TouchableOpacity onPress={() => setCurrentIndex(index)} style={currentIndex === index ? { padding: 5, marginHorizontal: 10, backgroundColor: COLORS.lightGray, borderRadius: 20, justifyContent: 'center', alignItems: 'center' } : { borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginHorizontal: 4 }}>
+            <ImageCmp imgUrl={imgUrl} index={index} key={`Product-${index}`} />
+          </TouchableOpacity>
         )
       )}
-    </View>
+    </View >
   );
 };
 
@@ -119,7 +118,7 @@ export const EndDate = ({ data }) => {
   );
 };
 
-export const SubInfo = ({ data }) => {
+export const SubInfo = ({ data, setCurrentIndex, currentIndex }) => {
   return (
     <View
       style={{
@@ -130,7 +129,7 @@ export const SubInfo = ({ data }) => {
         justifyContent: "space-between",
       }}
     >
-      <People data={data} />
+      <People images={data.image} setCurrentIndex={setCurrentIndex} currentIndex={currentIndex} />
     </View>
   );
 };

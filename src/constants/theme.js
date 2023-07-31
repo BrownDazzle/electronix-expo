@@ -5,7 +5,8 @@ export const COLORS = {
   tertiary: "#f02d34",
   white: "#FFF",
   gray: "#74858C",
-  blueish: '#007aff'
+  blueish: '#007aff',
+  lightGray: '#ccc'
 };
 
 export const SIZES = {

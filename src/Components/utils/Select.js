@@ -50,14 +50,14 @@ const AdvancedSelect = ({ data, state, setState }) => {
 
     return (
         <SelectList
-            onSelect={() => setState(state)}
+            //onSelect={() => setState(state)}
             setSelected={setState}
             fontFamily='lato'
             data={data}
             arrowicon={<FontAwesome name="chevron-down" size={12} color={'black'} />}
             searchicon={<FontAwesome name="search" size={12} color={'black'} />}
             search={false}
-            boxStyles={{ borderRadius: 10 }} //override default styles
+            boxStyles={{ borderRadius: 10, borderColor: '#ccc' }} //override default styles
         // defaultOption={{ key: '1', value: 'Jammu & Kashmir' }}   //default selected option
         />
     )

@@ -250,12 +250,13 @@ const bannerData = [
 
 const popularProducts = [
   {
-    id: 1,
-    manufacturer: "Apple",
-    title: 'iPhone 12',
+    id: 12,
+    category: 'Phones',
+    manufacturer: "Microsoft",
+    title: 'Windows Phone',
     rating: 3,
-    price: 999,
-    image: assets.slide3,
+    price: 12000,
+    image: [assets.windowsPhone],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -268,12 +269,13 @@ const popularProducts = [
     }
   },
   {
-    id: 2,
-    manufacturer: "Apple",
-    title: 'MacBook Pro',
+    id: 13,
+    category: 'Phones',
+    manufacturer: "Sony",
+    title: 'Sony Xperia',
     rating: 3,
-    price: 199,
-    image: assets.slide1,
+    price: 12000,
+    image: [assets.sonyXperia],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -286,12 +288,13 @@ const popularProducts = [
     }
   },
   {
-    id: 3,
-    manufacturer: "Samsung",
-    title: 'AirPods Pro',
+    id: 14,
+    category: 'Phones',
+    manufacturer: "Xiaomi",
+    title: 'Xiaomi Poco',
     rating: 3,
-    price: 249,
-    image: assets.slide2,
+    price: 12000,
+    image: [assets.xiaomiPoco],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -302,6 +305,45 @@ const popularProducts = [
       camera: "200x150",
       connectivity: "5G"
     }
+  },
+  {
+    id: 15,
+    category: 'Phones',
+    manufacturer: "Xiaomi",
+    title: 'Xiaomi Note 2',
+    rating: 3,
+    price: 12000,
+    image: [assets.xiaomiN2],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 16,
+    category: 'Phones',
+    manufacturer: "Xiaomi",
+    title: 'Xiaomi Note 3',
+    rating: 3,
+    price: 12000,
+    image: [assets.xiaomiN3],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+
   },
   // Add more products as needed
 ];
@@ -309,11 +351,12 @@ const popularProducts = [
 const products = [
   {
     id: 1,
+    category: 'Phones',
     manufacturer: "Apple",
     title: 'iPhone 12',
     rating: 3,
     price: 999,
-    image: assets.slide3,
+    image: [assets.iphone12, assets.iphone13pm, assets.iphone12pm, assets.iphone11],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -327,11 +370,12 @@ const products = [
   },
   {
     id: 2,
-    manufacturer: "Apple",
-    title: 'MacBook Pro',
+    category: 'Phones',
+    manufacturer: "Huawei",
+    title: 'Hauwei P40',
     rating: 4,
     price: 199,
-    image: assets.slide1,
+    image: [assets.hauweiP40, assets.hauweiM9, assets.hauweiP8],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -345,11 +389,11 @@ const products = [
   },
   {
     id: 3,
-    manufacturer: "Samsung",
-    title: 'AirPods Pro',
+    category: 'Phones', manufacturer: "Huawei",
+    title: 'Mate 9',
     rating: 5,
     price: 249,
-    image: assets.slide2,
+    image: [assets.hauweiM9, assets.hauweiP40, assets.hauweiP8],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -363,11 +407,11 @@ const products = [
   },
   {
     id: 4,
-    manufacturer: "Samsung",
-    title: 'iPhone 12',
+    category: 'Phones', manufacturer: "Samsung",
+    title: 'Galaxy S7',
     rating: 2.8,
     price: 999,
-    image: assets.slide3,
+    image: [assets.galaxyS7, assets.samsungA50, assets.samsungS21],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -381,11 +425,12 @@ const products = [
   },
   {
     id: 5,
-    manufacturer: "Samsung",
-    title: 'MacBook Pro',
+    category: 'Phones',
+    manufacturer: "Apple",
+    title: 'Iphone 11',
     rating: 3.6,
     price: 199,
-    image: assets.slide1,
+    image: [assets.iphone11, assets.iphone12, assets.iphone13pm, assets.iphone12pm,],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -399,11 +444,11 @@ const products = [
   },
   {
     id: 6,
-    manufacturer: "Samsung",
-    title: 'AirPods Pro',
+    category: 'Phones', manufacturer: "Apple",
+    title: 'Iphone 7',
     rating: 4.3,
     price: 249,
-    image: assets.slide2,
+    image: [assets.iphone7, assets.iphone12, assets.iphone13pm, assets.iphone12pm,],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -417,11 +462,11 @@ const products = [
   },
   {
     id: 7,
-    manufacturer: "Samsung",
-    title: 'iPhone 12',
+    category: 'Phones', manufacturer: "Apple",
+    title: 'IPhone 13 Pro Max',
     rating: 5,
     price: 999,
-    image: assets.slide3,
+    image: [assets.iphone13pm, assets.iphone12, assets.iphone12pm,],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -435,11 +480,11 @@ const products = [
   },
   {
     id: 8,
-    manufacturer: "Samsung",
-    title: 'MacBook Pro',
+    category: 'Phones', manufacturer: "Samsung",
+    title: 'Samsung S21',
     rating: 3.5,
     price: 199,
-    image: assets.slide1,
+    image: [assets.samsungS21, assets.samsungA50],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",
@@ -453,11 +498,182 @@ const products = [
   },
   {
     id: 9,
-    manufacturer: "Samsung",
-    title: 'AirPods Pro',
+    category: 'Phones', manufacturer: "Samsung",
+    title: 'Samsung A50',
     rating: 4.3,
     price: 249,
-    image: assets.slide2,
+    image: [assets.samsungA50, assets.galaxyS7],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 10,
+    category: 'Phones',
+    manufacturer: "Apple",
+    title: 'IPhone 12 Pro Max',
+    rating: 3,
+    price: 12000,
+    image: [assets.iphone12pm, assets.iphone12pm, assets.iphone11],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 11,
+    category: 'Phones',
+    manufacturer: "Huawei",
+    title: 'Hauwei P8',
+    rating: 3,
+    price: 12000,
+    image: [assets.hauweiP8, assets.hauweiM9],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 12,
+    category: 'Phones',
+    manufacturer: "Microsoft",
+    title: 'Windows Phone',
+    rating: 3,
+    price: 12000,
+    image: [assets.windowsPhone],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 13,
+    category: 'Phones',
+    manufacturer: "Sony",
+    title: 'Sony Xperia',
+    rating: 3,
+    price: 12000,
+    image: [assets.sonyXperia],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 14,
+    category: 'Phones',
+    manufacturer: "Xiaomi",
+    title: 'Xiaomi Poco',
+    rating: 3,
+    price: 12000,
+    image: [assets.xiaomiPoco, assets.xiaomiN3, assets.xiaomiN2],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 15,
+    category: 'Phones',
+    manufacturer: "Xiaomi",
+    title: 'Xiaomi Note 2',
+    rating: 3,
+    price: 12000,
+    image: [assets.xiaomiN2, assets.xiaomiPoco, assets.xiaomiN3],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 16,
+    category: 'Phones',
+    manufacturer: "Xiaomi",
+    title: 'Xiaomi Note 3',
+    rating: 3,
+    price: 12000,
+    image: [assets.xiaomiN3, assets.xiaomiPoco, assets.xiaomiN2],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 17,
+    category: 'Phones',
+    manufacturer: "HTC",
+    title: 'HTC 10',
+    rating: 3,
+    price: 12000,
+    image: [assets.htc10, assets.htcM9],
+    description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
+    specs: {
+      ram: "2GB",
+      storage: "4GB",
+      screenSize: "",
+      resolution: "2 x 4",
+      batteryCapacity: "400Amp",
+      camera: "200x150",
+      connectivity: "5G"
+    }
+  },
+  {
+    id: 18,
+    category: 'Phones',
+    manufacturer: "HTC",
+    title: 'HTC Mate 9',
+    rating: 3,
+    price: 12000,
+    image: [assets.htcM9, assets.htc10],
     description: "A smartphone should have a fast and efficient processor, sufficient RAM, and ample storage capacity to handle multiple tasks, run apps smoothly, and store files.",
     specs: {
       ram: "2GB",

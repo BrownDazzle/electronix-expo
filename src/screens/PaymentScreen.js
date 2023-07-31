@@ -75,74 +75,50 @@ const CartProducts = ({ products }) => {
 
 const PaymentScreen = ({ route, navigation }) => {
     const { shipping } = route.params
-    const dispatch = useDispatch()
     const cartItems = useSelector(selectCartItems);
+    const dispatch = useDispatch()
     const totalAmount = useSelector(selectTotalAmount);
     const totalQTY = useSelector(selectTotalQTY);
-
-
-    const orderObj = {
+    const [phoneNumber, setPhoneNumber] = useState('0973302063');
+    const [paymentObject, setSetPaymentObject] = useState({
         items: cartItems,
         totalAmount: totalAmount,
         quantity: totalQTY,
         shippingAddress: shipping,
+        paymentMethod: {}
     }
+    );
 
-    const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
-    const [mobile, SetMobile] = useState(false)
-    const [card, SetCard] = useState(false)
+    const handlePaymentSubmit = async () => {
+        // Handle the payment submission
+        // You can perform validation or API calls here
+        const url = "mtn"
+        try {
 
-    const [cardNumber, setCardNumber] = useState('');
-    const [network, setNetwork] = useState('');
-    const [creditCardData, setCreditCardData] = useState(null);
-
-    const handleSubmit = () => {
-        if (creditCardData && creditCardData.valid) {
-            // Payment form is valid, perform payment logic
-            console.log('Credit card data:', creditCardData);
-        } else {
-            // Payment form is invalid, display error or prompt for valid input
-            console.log('Invalid credit card data');
+            const response = await axios.post(`http://localhost:8000/api/orders/${url}`, paymentObject);
+            //const result = (await GlobalApi.postOrder(url, orderObj)).data
+            console.warn(response.data)
+            /*if (result.data) {
+                navigation.navigate("SuccessScreen", { message: result.data })
+                dispatch(setAddItemToNotifications({
+                    id: 1,
+                    title: 'Order succesfully made!',
+                    subTitle: 'See details',
+                    createdAt: Date.now()
+                }))
+            }*/
+        } catch (error) {
+            console.warn(error)
+            navigation.navigate("SuccessScreen", { message: error })
+            dispatch(setAddItemToNotifications({
+                id: 1,
+                title: 'Error: Order was unsuccesful!',
+                subTitle: 'See details',
+                createdAt: Date.now()
+            }))
         }
     };
 
-    const handlePaymentSubmit = () => {
-        // Handle the payment submission
-        // You can perform validation or API calls here
-
-        navigation.navigate("SuccessScreen")
-        dispatch(setAddItemToNotifications({
-            id: 1,
-            title: 'Order succesfully made!',
-            subTitle: 'See details',
-            createdAt: Date.now()
-        }))
-    };
-
-    const filters = [
-        { id: 1, name: 'Mobile Money' },
-        { id: 2, name: 'Visa Card' },
-        // Add more filters as needed
-    ];
-
-    const networkOptions = [
-        { label: "Airtel", value: "Airtel" },
-        { label: "MTN", value: "MTN" },
-        { label: "Zamtel", value: "Zamtel" },
-    ]
-
-    const networkData = [
-        { key: 1, value: "Choose Network", disabled: true },
-        { key: 2, value: "Airtel" },
-        { key: 3, value: "MTN" },
-        { key: 4, value: "Zamtel" },
-    ]
-
-
-    const handleNetworkChange = (value) => {
-        setNetwork(value);
-        // Perform additional logic based on network selection if needed
-    };
 
     const handlePaymentMethod = (index) => {
         setSelectedFilterIndex(index)
@@ -172,7 +148,7 @@ const PaymentScreen = ({ route, navigation }) => {
                 </View>
                 <View style={{ paddingHorizontal: 20 }}>
                     <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold, marginVertical: 10 }}>Shipping Contact</Text>
-                    <View style={{ padding: 10, width: '100%', borderWidth: 0.5, borderColor: COLORS.secondary, borderRadius: 10 }}>
+                    <View style={{ padding: 10, width: '100%', borderWidth: 0.5, borderColor: COLORS.lightGray, borderRadius: 10 }}>
 
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.semiBold, marginRight: 4 }}>Name :</Text>
@@ -183,31 +159,8 @@ const PaymentScreen = ({ route, navigation }) => {
                             <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.bold }}>{shipping.phoneNumber}</Text>
                         </View>
                     </View>
-                    {/* Payment Options */}
-                    <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold, marginVertical: 10 }}>Choose Payment Method</Text>
-                    <View style={styles.filterContainer}>
-                        <ButtonGroup
-                            buttons={filters.map((filter) => filter.name)}
-                            selectedIndex={selectedFilterIndex}
-                            onPress={(index) => handlePaymentMethod(index)}
-                            selectedButtonStyle={styles.selectedFilterButton}
-                            containerStyle={styles.filterButtonGroup}
-                        />
-                    </View>
-                    {mobile && (<AdvancedSelect data={networkData} state={network} setState={setNetwork} />)}
-                    {mobile && network && (<TextInput
-                        style={styles.input}
-                        placeholder={`${network} Number`}
-                        value={cardNumber}
-                        onChangeText={setCardNumber}
-                    />)}
-                    {card && (<CreditCardInput
-                        requiresName
-                        requiresCVC
-                        cardScale={1}
-                        onChange={(data) => setCreditCardData(data)}
-                        style={{ alignSelf: 'center', marginBottom: 5 }}
-                    />)}
+
+                    <PaymentGateway shipping={shipping} />
                 </View>
             </ScrollView>
 
@@ -222,6 +175,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    totalContainer: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: "center",
+        alignItems: 'center',
+        padding: 20,
+        borderTopWidth: 1,
+        borderTopColor: '#ccc',
+        bottom: 0
     },
     title: {
         fontSize: 24,
@@ -253,22 +216,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-    totalContainer: {
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: "center",
-        alignItems: 'center',
-        padding: 20,
-        borderTopWidth: 1,
-        borderTopColor: '#ccc',
-        bottom: 0
-    },
     filterContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical: 10,
+        paddingBottom: 10,
         paddingHorizontal: 20,
-        borderBottomWidth: 1,
         borderBottomColor: '#ccc',
     },
     filterTitle: {

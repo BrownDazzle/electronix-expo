@@ -53,8 +53,10 @@ const Category = ({ route }) => {
     const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
     const [productCount, setProductCount] = useState(4);
 
-    const handleCount = () => {
-        setProductCount(productCount + 4)
+    const handleCategory = (item) => {
+        setSelectedCategory(item)
+        const categoryData = products.filter((data) => { return data.manufacturer === item })
+        setData(categoryData)
     }
 
     const renderCategoryItem = ({ item }) => (
@@ -62,7 +64,7 @@ const Category = ({ route }) => {
             marginHorizontal: 4,
             borderWidth: 0.5,
             borderRadius: 5
-        }} onPress={() => setSelectedCategory(item)}>
+        }} onPress={() => handleCategory(item)}>
             <Text style={item === selectedCategory ? { color: COLORS.white, padding: 5 } : { padding: 5 }}>{item}</Text>
         </TouchableOpacity>
     );
@@ -85,14 +87,14 @@ const Category = ({ route }) => {
         setSelectedFilterIndex(index)
 
         if (index === 0) {
-            const ascData = [...products]?.sort((a, b) => b?.rating - a?.rating)
+            const ascData = [...data]?.sort((a, b) => b?.rating - a?.rating)
 
             setData(ascData)
         } else if (index === 1) {
-            const desData = [...products]?.sort((a, b) => a?.price - b?.price)
+            const desData = [...data]?.sort((a, b) => a?.price - b?.price)
             setData(desData)
         } else if (index === 2) {
-            const desData = [...products]?.sort((a, b) => b?.price - a?.price)
+            const desData = [...data]?.sort((a, b) => b?.price - a?.price)
             setData(desData)
         }
     }
@@ -152,25 +154,11 @@ const Category = ({ route }) => {
                 </View>
                 <View style={{ flex: 1, justifyContent: "center", paddingLeft: 15 }}>
                     <FlatList
-                        data={data?.slice(0, productCount)}
+                        data={data}
                         numColumns={2}
                         renderItem={productRender}
                         keyExtractor={(item) => item.id.toString()}
                     />
-                    <View style={{ flex: 1, paddingHorizontal: 40, marginVertical: 20 }}>
-                        {productCount < data?.length && (
-                            <RectButton title="More products" handlePress={handleCount} bgColor={COLORS.blueish} />
-                        )}
-                    </View>
-                    <View style={{ justifyContent: 'center', marginVertical: 20, width: '100%', paddingLeft: 50 }}>
-                        <BannerAd
-                            unitId={adUnitId}
-                            size={BannerAdSize.MEDIUM_RECTANGLE}
-                            requestOptions={{
-                                requestNonPersonalizedAdsOnly: true,
-                            }}
-                        />
-                    </View>
                 </View>
                 <View style={{ justifyContent: 'center', marginVertical: 20 }}>
                     <BannerAd
