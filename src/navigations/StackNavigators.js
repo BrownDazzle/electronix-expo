@@ -24,6 +24,8 @@ import StoresScreen from '../screens/StoresScreen.js';
 import SettingsScreen from '../screens/SettingsScreen.js';
 import PolicyScreen from '../screens/PolicyScreen.js';
 import Login from '../screens/Login.js';
+import OrdersScreen from '../screens/OrdersScreen.js';
+import OrderDetails from '../screens/OrderDetails.js';
 
 const AuthenticatedUserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -142,6 +144,16 @@ export function HomeStack() {
                     <Home.Screen
                         name="ProfileScreen"
                         component={ProfileScreen}
+                        options={{ headerShown: false }}
+                    />
+                    <Home.Screen
+                        name="OrdersScreen"
+                        component={OrdersScreen}
+                        options={{ headerShown: false }}
+                    />
+                    <Home.Screen
+                        name="OrderDetails"
+                        component={OrderDetails}
                         options={{ headerShown: false }}
                     />
                 </>

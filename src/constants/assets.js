@@ -28,7 +28,49 @@ import windowsPhone from '../../assets/stock/WindowsPhone.png'
 import xiaomiN2 from '../../assets/stock/XiaomiNote2.png'
 import xiaomiN3 from '../../assets/stock/XiaomiNote3.png'
 import xiaomiPoco from '../../assets/stock/xiaomipoco.png'
-
+// Computer Imports
+import acer1 from '../../assets/stock/Acer1.png'
+import acer2 from '../../assets/stock/Acer2.png'
+import apple1 from '../../assets/stock/apple1.png'
+import apple2 from '../../assets/stock/apple2.png'
+import asus1 from '../../assets/stock/asus1.png'
+import dell1 from '../../assets/stock/dell1.png'
+import dell2 from '../../assets/stock/dell2.png'
+import hp from '../../assets/stock/hp.png'
+import macbook from '../../assets/stock/macbook.png'
+import macbookPM from '../../assets/stock/macbookPM.png'
+import samsung1 from '../../assets/stock/samsung1.png'
+// Speaker Imports
+import speaker1 from '../../assets/stock/speaker1.webp'
+import speaker2 from '../../assets/stock/speaker2.webp'
+import speaker3 from '../../assets/stock/speaker3.webp'
+import speaker4 from '../../assets/stock/speaker4.webp'
+// Headphones Imports
+import headphone_a_1 from '../../assets/stock/headphones_a_1.webp'
+import headphone_a_2 from '../../assets/stock/headphones_a_2.webp'
+import headphone_a_3 from '../../assets/stock/headphones_a_3.webp'
+import headphone_a_4 from '../../assets/stock/headphones_a_4.webp'
+import headphone_b_1 from '../../assets/stock/headphones_b_1.webp'
+import headphone_b_2 from '../../assets/stock/headphones_b_2.webp'
+import headphone_b_3 from '../../assets/stock/headphones_b_3.webp'
+import headphone_b_4 from '../../assets/stock/headphones_b_4.webp'
+import headphone_c_1 from '../../assets/stock/headphones_c_1.webp'
+import headphone_c_2 from '../../assets/stock/headphones_c_2.webp'
+import headphone_c_3 from '../../assets/stock/headphones_c_3.webp'
+import headphone_c_4 from '../../assets/stock/headphones_c_4.webp'
+// Earphones Imports
+import earphone_a_1 from '../../assets/stock/earphones_a_1.webp'
+import earphone_a_2 from '../../assets/stock/earphones_a_2.webp'
+import earphone_a_3 from '../../assets/stock/earphones_a_3.webp'
+import earphone_a_4 from '../../assets/stock/earphones_a_4.webp'
+import earphone_b_1 from '../../assets/stock/earphones_b_1.webp'
+import earphone_b_2 from '../../assets/stock/earphones_b_2.webp'
+import earphone_b_3 from '../../assets/stock/earphones_b_3.webp'
+import earphone_b_4 from '../../assets/stock/earphones_b_4.webp'
+import earphone_c_1 from '../../assets/stock/earphones_c_1.webp'
+import earphone_c_2 from '../../assets/stock/earphones_c_2.webp'
+import earphone_c_3 from '../../assets/stock/earphones_c_3.webp'
+import earphone_c_4 from '../../assets/stock/earphones_c_4.webp'
 
 
 
@@ -51,6 +93,49 @@ export default {
   xiaomiN2,
   xiaomiN3,
   xiaomiPoco,
+
+  acer1,
+  acer2,
+  macbook,
+  macbookPM,
+  apple1,
+  apple2,
+  asus1,
+  dell1,
+  dell2,
+  hp,
+  samsung1,
+
+  speaker1,
+  speaker2,
+  speaker3,
+  speaker4,
+
+  headphone_a_1,
+  headphone_a_2,
+  headphone_a_3,
+  headphone_a_4,
+  headphone_b_1,
+  headphone_b_2,
+  headphone_b_3,
+  headphone_b_4,
+  headphone_c_1,
+  headphone_c_2,
+  headphone_c_3,
+  headphone_c_4,
+
+  earphone_a_1,
+  earphone_a_2,
+  earphone_a_3,
+  earphone_a_4,
+  earphone_b_1,
+  earphone_b_2,
+  earphone_b_3,
+  earphone_b_4,
+  earphone_c_1,
+  earphone_c_2,
+  earphone_c_3,
+  earphone_c_4,
 
   slide1,
   slide2,

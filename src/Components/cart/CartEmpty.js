@@ -5,8 +5,10 @@ import { Image } from 'react-native';
 import { RectButton } from '../Button';
 import BottomMenu from '../BottomMenu';
 import { ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const CartEmpty = () => {
+    const navigation = useNavigation()
 
     const handleHome = () => {
         navigation.navigate("HomeScreen")

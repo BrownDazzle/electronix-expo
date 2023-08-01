@@ -22,7 +22,7 @@ function CartItem({ item: { id, manufacturer, title, image, price, cartQuantity 
 
     return (
         <View style={styles.cartItem}>
-            <Image source={image} style={{ width: 70, height: 70, borderWidth: 0.5, borderColor: COLORS.secondary, borderRadius: 15, resizeMode: "cover" }} />
+            <Image source={image} style={{ width: 80, height: 80, borderWidth: 0.5, borderColor: COLORS.lightGray, borderRadius: 15, resizeMode: "contain", padding: 5 }} />
             <View style={{ flexDirection: "column" }}>
                 <Text style={styles.cartItemName}>{title}</Text>
                 <Text style={styles.cartItemPrice}>K{price}</Text>

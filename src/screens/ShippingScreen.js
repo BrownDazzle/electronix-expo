@@ -137,7 +137,7 @@ const ShippingScreen = ({ navigation }) => {
 
 
     const [shipping, setShipping] = useState({
-        fullName: 'Collins',
+        fullName: 'Collins Muna',
         address: '140/3 LA',
         city: 'Ndola',
         phoneNumber: '098977676'

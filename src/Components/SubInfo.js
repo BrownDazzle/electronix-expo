@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, FlatList } from "react-native";
 
 import { SIZES, FONTS, COLORS, SHADOWS, assets } from "../constants";
 import { data } from "../global/data";
@@ -69,15 +69,16 @@ const ImageCmp = ({ imgUrl, index }) => {
 
 export const People = ({ images, setCurrentIndex, currentIndex }) => {
   return (
-    <View style={{ flexDirection: "row" }}>
-      {images.map(
-        (imgUrl, index) => (
-          <TouchableOpacity onPress={() => setCurrentIndex(index)} style={currentIndex === index ? { padding: 5, marginHorizontal: 10, backgroundColor: COLORS.lightGray, borderRadius: 20, justifyContent: 'center', alignItems: 'center' } : { borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginHorizontal: 4 }}>
-            <ImageCmp imgUrl={imgUrl} index={index} key={`Product-${index}`} />
-          </TouchableOpacity>
-        )
+    <FlatList
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      data={images}
+      renderItem={({ item, index }) => (
+        <TouchableOpacity onPress={() => setCurrentIndex(index)} style={currentIndex === index ? { padding: 5, marginHorizontal: 10, backgroundColor: COLORS.lightGray, borderRadius: 20, justifyContent: 'center', alignItems: 'center' } : { borderRadius: 15, justifyContent: 'center', alignItems: 'center', marginHorizontal: 4 }}>
+          <ImageCmp imgUrl={item} index={index} key={`Product-${index}`} />
+        </TouchableOpacity>
       )}
-    </View >
+    />
   );
 };
 
@@ -123,7 +124,6 @@ export const SubInfo = ({ data, setCurrentIndex, currentIndex }) => {
     <View
       style={{
         width: "100%",
-        paddingHorizontal: SIZES.font,
         marginTop: SIZES.extraLarge,
         flexDirection: "row",
         justifyContent: "space-between",

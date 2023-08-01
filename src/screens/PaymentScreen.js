@@ -13,6 +13,7 @@ import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedI
 import { setAddItemToNotifications } from '../globalRedux/features/NotificationSlice';
 import Dropdown from '../Components/utils/DropdownSelect';
 import { AdvancedSelect, SingleSelect } from '../Components/utils/Select';
+import { setAddItemToOrders } from '../globalRedux/features/OrdersSlice';
 
 const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
@@ -77,27 +78,51 @@ const PaymentScreen = ({ route, navigation }) => {
     const { shipping } = route.params
     const cartItems = useSelector(selectCartItems);
     const dispatch = useDispatch()
+
+    function guidGenerator() {
+        const S4 = function () {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        };
+        return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+    }
+
+    const uniqueID = guidGenerator()
     const totalAmount = useSelector(selectTotalAmount);
     const totalQTY = useSelector(selectTotalQTY);
     const [phoneNumber, setPhoneNumber] = useState('0973302063');
     const [paymentObject, setSetPaymentObject] = useState({
+        id: uniqueID,
         items: cartItems,
         totalAmount: totalAmount,
         quantity: totalQTY,
         shippingAddress: shipping,
-        paymentMethod: {}
+        //paymentMethod: {},
+        createdAt: Date.now()
     }
     );
+
+    const onAddToOrders = () => {
+        dispatch(setAddItemToOrders(paymentObject));
+    };
+
 
     const handlePaymentSubmit = async () => {
         // Handle the payment submission
         // You can perform validation or API calls here
-        const url = "mtn"
+
         try {
 
-            const response = await axios.post(`http://localhost:8000/api/orders/${url}`, paymentObject);
+            onAddToOrders()
+
+            navigation.navigate("SuccessScreen", { message: 'successful' })
+            dispatch(setAddItemToNotifications({
+                id: uniqueID,
+                title: 'Order succesfully made!',
+                subTitle: 'See details',
+                createdAt: Date.now()
+            }))
+            // const response = await axios.post(`http://localhost:8000/api/orders/${url}`, paymentObject);
             //const result = (await GlobalApi.postOrder(url, orderObj)).data
-            console.warn(response.data)
             /*if (result.data) {
                 navigation.navigate("SuccessScreen", { message: result.data })
                 dispatch(setAddItemToNotifications({

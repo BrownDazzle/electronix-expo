@@ -51,11 +51,11 @@ const Category = ({ route }) => {
     const [categoryList, setCategoryList] = useState([])
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
     const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
-    const [productCount, setProductCount] = useState(4);
+    const database = products.filter((data) => (data.category === category))
 
     const handleCategory = (item) => {
         setSelectedCategory(item)
-        const categoryData = products.filter((data) => { return data.manufacturer === item })
+        const categoryData = database[0].data.filter((data) => { return data.manufacturer === item })
         setData(categoryData)
     }
 
@@ -107,7 +107,8 @@ const Category = ({ route }) => {
 
 
     useEffect(() => {
-        setData(products)
+        const database = products.filter((data) => (data.category === category))
+        setData(database[0].data)
     }, [products])
 
     return (

@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
     const { id, title, manufacturer, price, image } = product
 
     const onAddToCart = () => {
-        const item = { id, title, image, price, manufacturer };
+        const item = { id, title, image: image[0], price, manufacturer };
         dispatch(setAddItemToCart(item));
     };
 
@@ -92,9 +92,11 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        width: 120,
+        width: '100%',
         height: 120,
         marginBottom: 10,
+        justifyContent: 'center',
+        resizeMode: 'contain'
     },
     title: {
         fontSize: 16,

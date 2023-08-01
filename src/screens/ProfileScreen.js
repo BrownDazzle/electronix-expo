@@ -17,11 +17,12 @@ import {
 } from '@react-navigation/drawer';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function ProfileScreen({ navigation, props }) {
-
+export default function ProfileScreen({ props }) {
+    const navigation = useNavigation()
     const paperTheme = useTheme();
 
     //const { signOut, toggleTheme } = React.useContext(AuthContext);
@@ -66,7 +67,7 @@ export default function ProfileScreen({ navigation, props }) {
                                 />
                             )}
                             label="Home"
-                            onPress={() => { props.navigation.navigate('Home') }}
+                            onPress={() => { navigation.navigate('Home') }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -77,7 +78,7 @@ export default function ProfileScreen({ navigation, props }) {
                                 />
                             )}
                             label="Profile"
-                            onPress={() => { props.navigation.navigate('Profile') }}
+                            onPress={() => { navigation.navigate('Profile') }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -87,8 +88,8 @@ export default function ProfileScreen({ navigation, props }) {
                                     size={size}
                                 />
                             )}
-                            label="Bookmarks"
-                            onPress={() => { props.navigation.navigate('BookmarkScreen') }}
+                            label="Orders"
+                            onPress={() => { navigation.navigate('OrdersScreen') }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -99,7 +100,7 @@ export default function ProfileScreen({ navigation, props }) {
                                 />
                             )}
                             label="Settings"
-                            onPress={() => { props.navigation.navigate('SettingScreen') }}
+                            onPress={() => { navigation.navigate('SettingScreen') }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -110,7 +111,7 @@ export default function ProfileScreen({ navigation, props }) {
                                 />
                             )}
                             label="Support"
-                            onPress={() => { props.navigation.navigate('SupportScreen') }}
+                            onPress={() => { navigation.navigate('SupportScreen') }}
                         />
                     </Drawer.Section>
                     <Drawer.Section title="Preferences">

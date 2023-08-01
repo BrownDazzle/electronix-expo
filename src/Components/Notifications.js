@@ -10,6 +10,7 @@ import { CircleButton } from './Button';
 import { StatusBar } from 'react-native';
 import { selectCartItems } from '../globalRedux/features/CartSlice';
 import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 
 const DetailsHeader = ({ items, navigation }) => {
@@ -55,12 +56,14 @@ const DetailsHeader = ({ items, navigation }) => {
 };
 const NotificationsPage = () => {
     const dispatch = useDispatch()
+    const navigation = useNavigation()
     const [messages, setMessages] = useState([]);
     const cartItems = useSelector(selectnotificationItems);
     const ifCartState = useSelector(selectNotificationState);
     const translateXValue = useRef(new Animated.Value(0)).current;
 
     const handleRead = (id) => {
+        navigation.navigate('OrdersScreen', { id })
         dispatch(setRemoveItemFromNotifications({
             id: id,
         }))

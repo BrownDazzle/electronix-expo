@@ -109,7 +109,7 @@ const DetailScreen = ({ route, navigation }) => {
     const { id, title, manufacturer, price, image } = product
 
     const onAddToCart = () => {
-        const item = { id, title, image, price, manufacturer };
+        const item = { id, title, image: image[currentIndex], price, manufacturer };
         dispatch(setAddItemToCart(item));
     };
 
@@ -120,10 +120,10 @@ const DetailScreen = ({ route, navigation }) => {
     };
 
     const onIncreaseItemQTY = () => {
-        dispatch(setIncreaseItemQTY({ id, manufacturer, title, image, price }))
+        dispatch(setIncreaseItemQTY({ id, manufacturer, title, image: image[currentIndex], price }))
     }
     const onDecreaseItemQTY = () => {
-        dispatch(setDecreaseItemQTY({ id, manufacturer, title, image, price }))
+        dispatch(setDecreaseItemQTY({ id, manufacturer, title, image: image[currentIndex], price }))
     }
 
 
