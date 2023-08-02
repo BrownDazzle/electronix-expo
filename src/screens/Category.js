@@ -11,6 +11,7 @@ import { RectButton } from '../Components/Button';
 import { BottomMenu } from '../Components';
 import ToastManager from 'expo-react-native-toastify';
 import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
+import { Image } from 'react-native';
 
 
 const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
@@ -49,7 +50,7 @@ const Category = ({ route }) => {
     const navigation = useNavigation()
     const [data, setData] = useState([])
     const [categoryList, setCategoryList] = useState([])
-    const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
     const database = products.filter((data) => (data.category === category))
 
@@ -154,12 +155,18 @@ const Category = ({ route }) => {
                     />
                 </View>
                 <View style={{ flex: 1, justifyContent: "center", paddingLeft: 15 }}>
-                    <FlatList
+                    {data.length >= 1 ? (<FlatList
                         data={data}
                         numColumns={2}
                         renderItem={productRender}
                         keyExtractor={(item) => item.id.toString()}
-                    />
+                    />) : (
+                        <View style={{ flexDirection: 'column', padding: 20, justifyContent: 'center', flex: 1, alignSelf: 'center' }}>
+                            <Image source={assets.soldOut} style={{ width: 200, height: 200, resizeMode: 'contain', alignSelf: 'center' }} />
+                            <Text style={{ fontSize: SIZES.extraLarge, fontWeight: FONTS.semiBold, color: COLORS.tertiary, alignSelf: 'center' }}>{selectedCategory} Is Unavailable</Text>
+                            <Text style={{ fontSize: SIZES.large, fontWeight: FONTS.bold, color: COLORS.secondary, alignSelf: 'center' }}>Try again later.</Text>
+                        </View>
+                    )}
                 </View>
                 <View style={{ justifyContent: 'center', marginVertical: 20 }}>
                     <BannerAd

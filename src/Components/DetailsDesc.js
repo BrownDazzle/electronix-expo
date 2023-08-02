@@ -45,7 +45,7 @@ const DetailsDesc = ({ data }) => {
           </TouchableOpacity>
         ))}
       </View>
-      <View style={{ marginVertical: SIZES.extraLarge * 1.5 }}>
+      <View style={{ marginVertical: SIZES.extraLarge }}>
         <Text
           style={{
             fontSize: SIZES.font,

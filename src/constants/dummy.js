@@ -445,7 +445,7 @@ const products = [
       {
         id: 1,
         manufacturer: "Apple",
-        title: 'iPhone 12',
+        title: 'iPod 12',
         rating: 3,
         price: 999,
         image: [assets.earphone_a_1, assets.earphone_a_2, assets.earphone_a_3, assets.earphone_a_4],
@@ -462,8 +462,8 @@ const products = [
       },
       {
         id: 2,
-        manufacturer: "Huawei",
-        title: 'Hauwei P40',
+        manufacturer: 'Sony',
+        title: 'Sony P40',
         rating: 4,
         price: 199,
         image: [assets.earphone_b_1, assets.earphone_b_2, assets.earphone_b_3, assets.earphone_b_4],
@@ -480,8 +480,8 @@ const products = [
       },
       {
         id: 3,
-        manufacturer: "Huawei",
-        title: 'Mate 9',
+        manufacturer: "Bose",
+        title: 'Bose M9',
         rating: 5,
         price: 249,
         image: [assets.earphone_c_3, assets.earphone_b_2, assets.earphone_a_3, assets.earphone_c_4],
@@ -499,7 +499,7 @@ const products = [
       {
         id: 4,
         manufacturer: "Samsung",
-        title: 'Galaxy S7',
+        title: 'Samsung S7',
         rating: 2.8,
         price: 999,
         image: [assets.earphone_a_2, assets.earphone_c_3, assets.earphone_a_4],
@@ -516,8 +516,8 @@ const products = [
       },
       {
         id: 5,
-        manufacturer: "Apple",
-        title: 'Iphone 11',
+        manufacturer: "Beats",
+        title: 'Beats Pro',
         rating: 3.6,
         price: 199,
         image: [assets.earphone_c_1, assets.earphone_b_2, assets.earphone_a_3, assets.earphone_c_4],
@@ -539,8 +539,8 @@ const products = [
     data: [
       {
         id: 1,
-        manufacturer: "Apple",
-        title: 'iPhone 12',
+        manufacturer: "Beats",
+        title: 'Beats Pro',
         rating: 3,
         price: 999,
         image: [assets.headphone_a_1, assets.headphone_a_2, assets.headphone_a_3, assets.headphone_a_4],
@@ -557,8 +557,8 @@ const products = [
       },
       {
         id: 2,
-        manufacturer: "Huawei",
-        title: 'Hauwei P40',
+        manufacturer: "Pioneer",
+        title: 'Pioneer M40',
         rating: 4,
         price: 199,
         image: [assets.headphone_b_1, assets.headphone_b_2, assets.headphone_b_3, assets.headphone_b_4],
@@ -575,8 +575,8 @@ const products = [
       },
       {
         id: 3,
-        manufacturer: "Huawei",
-        title: 'Mate 9',
+        manufacturer: "Bose",
+        title: 'Bose Loop',
         rating: 5,
         price: 249,
         image: [assets.headphone_c_3, assets.headphone_b_2, assets.headphone_a_3, assets.headphone_c_4],
@@ -594,7 +594,7 @@ const products = [
       {
         id: 4,
         manufacturer: "Samsung",
-        title: 'Galaxy S7',
+        title: 'Samsung P7',
         rating: 2.8,
         price: 999,
         image: [assets.headphone_a_2, assets.headphone_c_3, assets.headphone_a_4],
@@ -611,8 +611,8 @@ const products = [
       },
       {
         id: 5,
-        manufacturer: "Apple",
-        title: 'Iphone 11',
+        manufacturer: "Beats by Dre",
+        title: 'Dre Max',
         rating: 3.6,
         price: 199,
         image: [assets.headphone_c_1, assets.headphone_b_2, assets.headphone_a_3, assets.headphone_c_4],
@@ -634,8 +634,8 @@ const products = [
     data: [
       {
         id: 1,
-        manufacturer: "Apple",
-        title: 'iPhone 12',
+        manufacturer: "JBL",
+        title: 'JBL Pro',
         rating: 3,
         price: 999,
         image: [assets.speaker1],
@@ -652,8 +652,8 @@ const products = [
       },
       {
         id: 2,
-        manufacturer: "Huawei",
-        title: 'Hauwei P40',
+        manufacturer: "LG",
+        title: 'LG P40',
         rating: 4,
         price: 199,
         image: [assets.speaker2],
@@ -670,8 +670,8 @@ const products = [
       },
       {
         id: 3,
-        manufacturer: "Huawei",
-        title: 'Mate 9',
+        manufacturer: "Sony",
+        title: 'Sony M9',
         rating: 5,
         price: 249,
         image: [assets.speaker3],
@@ -688,8 +688,8 @@ const products = [
       },
       {
         id: 4,
-        manufacturer: "Samsung",
-        title: 'Galaxy S7',
+        manufacturer: "Ultimate Ears",
+        title: 'Ultimate Sound',
         rating: 2.8,
         price: 999,
         image: [assets.speaker4],

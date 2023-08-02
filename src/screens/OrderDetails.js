@@ -53,22 +53,22 @@ function OrderDetails({ route }) {
                             <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>Quantity: {selectedOrder.quantity}</Text>
                             <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>Total Amount: K{selectedOrder.totalAmount}</Text>
                         </View>
-                        <Text style={{ fontSize: SIZES.large, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5, marginTop: 20 }}>Shipping Details</Text>
-                        <View style={{ marginBottom: 5, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray }}>
+                        <Text style={{ fontSize: SIZES.large, fontWeight: FONTS.semiBold, marginBottom: 10, marginLeft: 5, marginTop: 20 }}>Shipping Details</Text>
+                        <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray }}>
                             <Text style={{ color: COLORS.secondary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>Names:</Text>
-                            <Text style={{ marginLeft: 5, color: COLORS.secondary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>{selectedOrder.shippingAddress.fullName}</Text>
+                            <Text style={{ marginLeft: 5, color: COLORS.primary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>{selectedOrder.shippingAddress.fullName}</Text>
                         </View>
-                        <View style={{ marginBottom: 5, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray }}>
+                        <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray }}>
                             <Text style={{ color: COLORS.secondary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>Phone Number:</Text>
-                            <Text style={{ marginLeft: 5, color: COLORS.secondary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>{selectedOrder.shippingAddress.phoneNumber}</Text>
+                            <Text style={{ marginLeft: 5, color: COLORS.primary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>{selectedOrder.shippingAddress.phoneNumber}</Text>
                         </View>
-                        <View style={{ marginBottom: 5, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray }}>
+                        <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray }}>
                             <Text style={{ color: COLORS.secondary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>City:</Text>
-                            <Text style={{ marginLeft: 5, color: COLORS.secondary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>{selectedOrder.shippingAddress.city}</Text>
+                            <Text style={{ marginLeft: 5, color: COLORS.primary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>{selectedOrder.shippingAddress.city}</Text>
                         </View>
-                        <View style={{ marginBottom: 5, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray }}>
+                        <View style={{ marginBottom: 10, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray }}>
                             <Text style={{ color: COLORS.secondary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>Address:</Text>
-                            <Text style={{ marginLeft: 5, color: COLORS.secondary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>{selectedOrder.shippingAddress.address}</Text>
+                            <Text style={{ marginLeft: 5, color: COLORS.primary, fontSize: SIZES.font, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>{selectedOrder.shippingAddress.address}</Text>
                         </View>
                         <View style={{ marginBottom: 5, flexDirection: 'row', alignItems: 'center', alignSelf: 'center', marginTop: 20 }}>
                             <Text style={{ color: COLORS.secondary, fontSize: SIZES.small, fontWeight: FONTS.semiBold, marginBottom: 5, marginLeft: 5 }}>Powered by</Text>

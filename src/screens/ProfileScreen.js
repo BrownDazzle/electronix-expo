@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import {
     useTheme,
     Avatar,
@@ -7,7 +7,6 @@ import {
     Caption,
     Paragraph,
     Drawer,
-    Text,
     TouchableRipple,
     Switch
 } from 'react-native-paper';
@@ -15,9 +14,13 @@ import {
     DrawerContentScrollView,
     DrawerItem
 } from '@react-navigation/drawer';
+import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
+const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
+import { COLORS, FONTS, SIZES, assets } from '../constants';
+import { AntDesign, Entypo, FontAwesome, FontAwesome5, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import BottomMenu from '../Components/BottomMenu';
 
 
 
@@ -25,120 +28,105 @@ export default function ProfileScreen({ props }) {
     const navigation = useNavigation()
     const paperTheme = useTheme();
 
+    const categories = [
+        {
+            name: 'Home',
+            screen: "HomeScreen",
+            icon: <MaterialCommunityIcons name="home-circle-outline" size={28} color="black" />,
+        },
+        {
+            name: 'Orders',
+            screen: "OrdersScreen",
+            icon: <FontAwesome name="shopping-basket" size={22} color="black" />,
+        },
+        {
+            name: 'Shipping Address',
+            screen: "ShippingScreen",
+            icon: <MaterialCommunityIcons name="map-marker-star-outline" size={24} color="black" />,
+        },
+        {
+            name: 'Set Payment Option',
+            screen: 'StoresScreen',
+            icon: <FontAwesome5 name="comment-dollar" size={22} color="black" />,
+        },
+        {
+            name: 'Settings',
+            screen: 'SettingsScreen',
+            icon: <Ionicons name="settings-outline" size={24} color="black" />,
+        },
+        {
+            name: 'Policy & Safety',
+            screen: 'PolicyScreen',
+            icon: <AntDesign name="Safety" size={24} color="black" />,
+        },
+
+    ];
+
+    const handleCategoryPress = (category) => {
+        // Handle category press logic
+
+        navigation.navigate(`${category.screen}`, { category: category.name })
+    };
+
     //const { signOut, toggleTheme } = React.useContext(AuthContext);
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: COLORS.white }}>
+            <BottomMenu />
             <DrawerContentScrollView {...props}>
                 <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
-                        <View style={{ flexDirection: 'row', marginTop: 15 }}>
+                        <View style={{ flexDirection: 'row', marginTop: 15, alignItems: 'center' }}>
                             <Avatar.Image
-                                source={{
-                                    uri: 'https://api.adorable.io/avatars/50/abott@adorable.png'
-                                }}
-                                size={50}
+                                source={assets.person02}
+                                size={70}
                             />
                             <View style={{ marginLeft: 15, flexDirection: 'column' }}>
-                                <Title style={styles.title}>Matilda Mulenga</Title>
-                                <Caption style={styles.caption}>@matilda_lenga</Caption>
-                            </View>
-                        </View>
-
-                        <View style={styles.row}>
-                            <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>80</Paragraph>
-                                <Caption style={styles.caption}>Following</Caption>
-                            </View>
-                            <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>100</Paragraph>
-                                <Caption style={styles.caption}>Followers</Caption>
+                                <Text style={styles.title}>Martin Mulenga</Text>
+                                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')} style={styles.caption}>
+                                    <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.light, color: COLORS.secondary, borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray, marginRight: 60, marginTop: 3, paddingVertical: 2, alignItems: 'center', flexDirection: 'row' }}><Entypo name="plus" size={14} color="black" /> edit profile</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
+                </View>
+                <View style={{ paddingHorizontal: 30, paddingTop: 20, marginTop: 30, borderTopWidth: 0.5, borderTopColor: COLORS.lightGray }}>
+                    {categories.map((category, index) => (
+                        <TouchableOpacity
+                            key={index}
+                            style={styles.categoryButton}
+                            onPress={() => handleCategoryPress(category)}
 
-                    <Drawer.Section style={styles.drawerSection}>
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
-                                    name="home-outline"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Home"
-                            onPress={() => { navigation.navigate('Home') }}
-                        />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
-                                    name="account-outline"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Profile"
-                            onPress={() => { navigation.navigate('Profile') }}
-                        />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
-                                    name="bookmark-outline"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Orders"
-                            onPress={() => { navigation.navigate('OrdersScreen') }}
-                        />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
-                                    name="settings-outline"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Settings"
-                            onPress={() => { navigation.navigate('SettingScreen') }}
-                        />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
-                                    name="account-check-outline"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Support"
-                            onPress={() => { navigation.navigate('SupportScreen') }}
-                        />
-                    </Drawer.Section>
-                    <Drawer.Section title="Preferences">
-                        <TouchableRipple onPress={() => { toggleTheme() }}>
-                            <View style={styles.preference}>
-                                <Text>Dark Theme</Text>
-                                <View pointerEvents="none">
-                                    <Switch value={paperTheme.dark} />
-                                </View>
-                            </View>
-                        </TouchableRipple>
-                    </Drawer.Section>
+                        >
+                            {category.icon}
+                            <Text style={styles.categoryText}>{category.name}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
+                <View style={{ borderTopWidth: 0.5, borderTopColor: COLORS.lightGray, padding: 20, marginHorizontal: 30 }}>
+                    <TouchableOpacity style={{
+                        paddingVertical: 5,
+                        marginVertical: 5,
+                        backgroundColor: COLORS.white,
+                        borderRadius: 5,
+                        flexDirection: 'row',
+                        alignItems: 'center'
+                    }}
+                        onPress={() => { }}>
+                        <AntDesign name="logout" size={24} color="black" />
+                        <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.light, color: COLORS.secondary, marginLeft: 20 }}>Logout</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+                    <BannerAd
+                        unitId={adUnitId}
+                        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                    />
                 </View>
             </DrawerContentScrollView>
-            <Drawer.Section style={styles.bottomDrawerSection}>
-                <DrawerItem
-                    icon={({ color, size }) => (
-                        <Icon
-                            name="exit-to-app"
-                            color={color}
-                            size={size}
-                        />
-                    )}
-                    label="Sign Out"
-                // onPress={() => { signOut() }}
-                />
-            </Drawer.Section>
         </View>
     );
 }
@@ -146,6 +134,7 @@ export default function ProfileScreen({ props }) {
 const styles = StyleSheet.create({
     drawerContent: {
         flex: 1,
+        paddingLeft: 20
     },
     userInfoSection: {
         paddingLeft: 20,
@@ -186,5 +175,21 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingVertical: 12,
         paddingHorizontal: 16,
+    },
+    categoryButton: {
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        marginVertical: 5,
+        backgroundColor: COLORS.white,
+        borderRadius: 5,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    categoryText: {
+        fontSize: 16,
+        fontWeight: FONTS.semiBold,
+        marginLeft: 20,
+        marginRight: 70,
+        color: COLORS.secondary
     },
 });

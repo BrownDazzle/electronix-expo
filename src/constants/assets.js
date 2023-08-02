@@ -8,7 +8,9 @@ import banner4 from "../../assets/images/banner4.jpg"
 import left from "../../assets/icons/left.png"
 import video1 from "../../assets/videos/trans-phone.mp4"
 import badge from "../../assets/icons/badge.png"
+import soldOut from "../../assets/icons/soldout.png"
 import person01 from "../../assets/images/person02.png"
+import person02 from "../../assets/driver.png"
 // Phone Imports
 import galaxyS7 from '../../assets/stock/GalaxyS7EM.png'
 import hauweiP40 from '../../assets/stock/hauweiP40.png'
@@ -148,8 +150,10 @@ export default {
 
   left,
   badge,
+  soldOut,
 
   person01,
+  person02,
 
   video1
 }

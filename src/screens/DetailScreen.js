@@ -141,19 +141,19 @@ const DetailScreen = ({ route, navigation }) => {
                 <DetailsHeader data={product} currentIndex={currentIndex} navigation={navigation} />
                 <SubInfo data={product} setCurrentIndex={setCurrentIndex} currentIndex={currentIndex} />
                 <View style={{ marginTop: 20, flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}>
-                    <TouchableOpacity onPress={() => onAddToCart()} style={{ paddingVertical: 5, paddingHorizontal: 15, borderRadius: 8, color: COLORS.white, backgroundColor: COLORS.tertiary, fontSize: SIZES.font, fontWeight: FONTS.semiBold }}>
+                    <TouchableOpacity onPress={() => { handleBuy(); rewardedInterstitial.show() }}>
+                        <Text style={{ paddingVertical: 8, paddingHorizontal: 12, borderRadius: 8, color: COLORS.white, backgroundColor: COLORS.primary, fontSize: SIZES.large, fontWeight: FONTS.bold }}>Buy Now</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => onAddToCart()} style={{ paddingVertical: 5, paddingHorizontal: 15, borderRadius: 8, color: COLORS.white, backgroundColor: COLORS.secondary, fontSize: SIZES.font, fontWeight: FONTS.semiBold }}>
                         <FontAwesome5 name="plus" size={12} color={COLORS.white} style={{
                             position: "absolute",
                             bottom: 12,
                             left: 10,
 
                         }} />
-                        <FontAwesome5 name="opencart" size={25} color={COLORS.white} />
+                        <FontAwesome5 name="opencart" size={28} color={COLORS.white} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { handleBuy(); rewardedInterstitial.show() }}>
-                        <Text style={{ paddingVertical: 8, paddingHorizontal: 12, borderRadius: 8, color: COLORS.white, backgroundColor: COLORS.blueish, fontSize: SIZES.medium, fontWeight: FONTS.bold }}>Buy Now</Text>
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: "row", justifyContent: 'space-around', marginTop: 5 }}>
+                    {/*<View style={{ flexDirection: "row", justifyContent: 'space-around', marginTop: 5 }}>
                         <TouchableOpacity style={{ marginRight: 10 }} onPress={() => onDecreaseItemQTY()}>
                             <AntDesign name="minuscircle" size={32} color="black" />
                         </TouchableOpacity>
@@ -161,9 +161,9 @@ const DetailScreen = ({ route, navigation }) => {
                         <TouchableOpacity onPress={() => onIncreaseItemQTY()}>
                             <AntDesign name="pluscircle" size={32} color="black" />
                         </TouchableOpacity>
-                    </View>
+                    </View>*/}
                 </View>
-                <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+                <View style={{ justifyContent: 'center', marginTop: 20 }}>
                     <BannerAd
                         unitId={adUnitId}
                         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}

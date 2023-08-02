@@ -56,9 +56,9 @@ function BottomMenu() {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleProfile()}>
                     <Image
-                        source={assets.person01}
+                        source={assets.person02}
                         resizeMode="contain"
-                        style={{ width: 34, height: 34 }}
+                        style={{ width: 35, height: 35, borderRadius: 50 }}
 
                     />
                     <Image
