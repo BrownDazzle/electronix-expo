@@ -125,7 +125,6 @@ function StoresScreen() {
                         123 CBD
                         {'\n'}
                         Lusaka,
-                        {'\n'}
                         Zambia
                     </Text>
                 </View>

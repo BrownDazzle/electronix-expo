@@ -53,9 +53,9 @@ const DetailsHeader = ({ items, navigation }) => {
 const CartProducts = ({ products }) => {
 
     const renderItem = ({ item }) => (
-        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-            <Image source={item.image} style={{ width: 180, height: 90, resizeMode: "contain", marginRight: 10 }} />
-            <View style={{ flexDirection: 'column' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, marginHorizontal: 20, paddingBottom: 20, borderBottomWidth: 0.5, borderBottomColor: COLORS.lightGray }}>
+            <Image source={item.image} style={{ width: 160, height: 90, resizeMode: "contain", marginRight: 10, }} />
+            <View style={{ flexDirection: 'column', borderLeftWidth: 0.5, borderLeftColor: COLORS.lightGray, paddingLeft: 20 }}>
                 <Text style={{ fontSize: 20, fontWeight: FONTS.light }}>{item.title}</Text>
                 <Text style={{ fontSize: SIZES.small, fontWeight: FONTS.semiBold }}>{item.manufacturer}</Text>
                 <Text style={{ fontSize: SIZES.medium, fontWeight: FONTS.bold }}>K{item.price}</Text>

@@ -26,6 +26,7 @@ import PolicyScreen from '../screens/PolicyScreen.js';
 import Login from '../screens/Login.js';
 import OrdersScreen from '../screens/OrdersScreen.js';
 import OrderDetails from '../screens/OrderDetails.js';
+import SetPayOptions from '../screens/SetPayOptions.js';
 
 const AuthenticatedUserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -154,6 +155,11 @@ export function HomeStack() {
                     <Home.Screen
                         name="OrderDetails"
                         component={OrderDetails}
+                        options={{ headerShown: false }}
+                    />
+                    <Home.Screen
+                        name="SetPayOptions"
+                        component={SetPayOptions}
                         options={{ headerShown: false }}
                     />
                 </>

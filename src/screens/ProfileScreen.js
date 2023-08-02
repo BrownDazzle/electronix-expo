@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-native';
 import {
     useTheme,
     Avatar,
@@ -14,6 +14,8 @@ import {
     DrawerContentScrollView,
     DrawerItem
 } from '@react-navigation/drawer';
+import React, { useRef } from 'react';
+import BottomSheet from '@gorhom/bottom-sheet';
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
@@ -22,11 +24,30 @@ import { COLORS, FONTS, SIZES, assets } from '../constants';
 import { AntDesign, Entypo, FontAwesome, FontAwesome5, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import BottomMenu from '../Components/BottomMenu';
 
+const BottomSheetContent = () => {
+    return (
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+            <Text style={styles.text}>
+                {/* Place your scrollable content here */}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur commodo magna in eros
+                egestas tristique. Etiam tristique quam in urna gravida, at pellentesque arcu euismod.
+                Pellentesque in iaculis erat, eu dapibus velit. Duis at dictum odio. Sed feugiat justo id
+                semper interdum.
+            </Text>
+        </ScrollView>
+    );
+};
 
 
 export default function ProfileScreen({ props }) {
     const navigation = useNavigation()
     const paperTheme = useTheme();
+    const bottomSheetRef = useRef(null);
+
+    const handleSnap = (index) => {
+        // Handle events when the bottom sheet snaps (optional)
+    };
+
 
     const categories = [
         {
@@ -40,13 +61,13 @@ export default function ProfileScreen({ props }) {
             icon: <FontAwesome name="shopping-basket" size={22} color="black" />,
         },
         {
-            name: 'Shipping Address',
-            screen: "ShippingScreen",
+            name: 'Near Stores',
+            screen: "StoresScreen",
             icon: <MaterialCommunityIcons name="map-marker-star-outline" size={24} color="black" />,
         },
         {
             name: 'Set Payment Option',
-            screen: 'StoresScreen',
+            screen: 'SetPayOptions',
             icon: <FontAwesome5 name="comment-dollar" size={22} color="black" />,
         },
         {
@@ -96,7 +117,6 @@ export default function ProfileScreen({ props }) {
                             key={index}
                             style={styles.categoryButton}
                             onPress={() => handleCategoryPress(category)}
-
                         >
                             {category.icon}
                             <Text style={styles.categoryText}>{category.name}</Text>
@@ -117,6 +137,15 @@ export default function ProfileScreen({ props }) {
                         <Text style={{ fontSize: SIZES.font, fontWeight: FONTS.light, color: COLORS.secondary, marginLeft: 20 }}>Logout</Text>
                     </TouchableOpacity>
                 </View>
+                <BottomSheet
+                    ref={bottomSheetRef}
+                    index={-1} // Start with the sheet closed
+                    snapPoints={['10%', '50%', '90%']} // Define the snap points for the bottom sheet
+                    onChange={handleSnap} // Event listener when the bottom sheet snaps (optional)
+                >
+                    {/* Content inside the BottomSheet */}
+                    <BottomSheetContent />
+                </BottomSheet>
                 <View style={{ justifyContent: 'center', marginVertical: 20 }}>
                     <BannerAd
                         unitId={adUnitId}
@@ -191,5 +220,11 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 70,
         color: COLORS.secondary
+    },
+    contentContainer: {
+        padding: 16,
+    },
+    text: {
+        fontSize: 16,
     },
 });
